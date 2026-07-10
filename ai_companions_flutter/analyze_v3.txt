@@ -1,0 +1,207 @@
+Analyzing ai_companions_flutter...                              
+
+   info - The member 'register' overrides an inherited member but isn't annotated with '@override'. Try adding the '@override' annotation - lib\core\services\auth_service.dart:16:24 - annotate_overrides
+   info - The member 'login' overrides an inherited member but isn't annotated with '@override'. Try adding the '@override' annotation - lib\core\services\auth_service.dart:42:24 - annotate_overrides
+   info - The member 'logout' overrides an inherited member but isn't annotated with '@override'. Try adding the '@override' annotation - lib\core\services\auth_service.dart:64:16 - annotate_overrides
+   info - The member 'forgotPassword' overrides an inherited member but isn't annotated with '@override'. Try adding the '@override' annotation - lib\core\services\auth_service.dart:68:16 - annotate_overrides
+   info - The member 'getProfile' overrides an inherited member but isn't annotated with '@override'. Try adding the '@override' annotation - lib\core\services\auth_service.dart:79:19 - annotate_overrides
+   info - The member 'hasToken' overrides an inherited member but isn't annotated with '@override'. Try adding the '@override' annotation - lib\core\services\auth_service.dart:89:16 - annotate_overrides
+  error - The named parameter 'settings' is required, but there's no corresponding argument. Try adding the required argument - lib\core\services\notification_service.dart:16:32 - missing_required_argument
+  error - Too many positional arguments: 0 expected, but 1 found. Try removing the extra positional arguments, or specifying the name for named arguments - lib\core\services\notification_service.dart:17:7 - extra_positional_arguments_could_be_named
+  error - The named parameter 'id' is required, but there's no corresponding argument. Try adding the required argument - lib\core\services\notification_service.dart:39:32 - missing_required_argument
+  error - Too many positional arguments: 0 expected, but 4 found. Try removing the extra positional arguments, or specifying the name for named arguments - lib\core\services\notification_service.dart:39:37 - extra_positional_arguments_could_be_named
+warning - Duplicate import. Try removing all but one import of the library - lib\core\services\user_service.dart:3:8 - duplicate_import
+warning - Duplicate import. Try removing all but one import of the library - lib\core\services\user_service.dart:4:8 - duplicate_import
+   info - 'encryptedSharedPreferences' is deprecated and shouldn't be used. EncryptedSharedPreferences is deprecated and will be removed in v11. The Jetpack Security library is deprecated by Google. Your data will be automatically migrated to custom ciphers on first access. Remove this parameter - it will be ignored. Try replacing the use of the deprecated member with the replacement - lib\core\storage\token_storage.dart:15:7 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss. Try replacing the use of the deprecated member with the replacement - lib\core\theme\app_colors.dart:84:47 - deprecated_member_use
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\admin\screens\admin_users_screen.dart:10:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\auth\screens\forgot_password_screen.dart:12:9 - use_super_parameters
+   info - Don't use 'BuildContext's across async gaps. Try rewriting the code to not use the 'BuildContext', or guard the use with a 'mounted' check - lib\features\auth\screens\forgot_password_screen.dart:89:52 - use_build_context_synchronously
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\auth\screens\login_screen.dart:17:9 - use_super_parameters
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check. Guard a 'State.context' use with a 'mounted' check on the State, and other BuildContext use with a 'mounted' check on the BuildContext - lib\features\auth\screens\login_screen.dart:148:46 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check. Guard a 'State.context' use with a 'mounted' check on the State, and other BuildContext use with a 'mounted' check on the BuildContext - lib\features\auth\screens\login_screen.dart:150:54 - use_build_context_synchronously
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\auth\screens\register_screen.dart:14:9 - use_super_parameters
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check. Guard a 'State.context' use with a 'mounted' check on the State, and other BuildContext use with a 'mounted' check on the BuildContext - lib\features\auth\screens\register_screen.dart:147:46 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check. Guard a 'State.context' use with a 'mounted' check on the State, and other BuildContext use with a 'mounted' check on the BuildContext - lib\features\auth\screens\register_screen.dart:149:54 - use_build_context_synchronously
+   info - Use a function declaration rather than a variable assignment to bind a function to a name. Try rewriting the closure assignment as a function declaration - lib\features\character\providers\character_provider.dart:155:13 - prefer_function_declarations_over_variables
+warning - Unused import: '../../../core/services/character_service.dart'. Try removing the import directive - lib\features\character\screens\character_create_screen.dart:11:8 - unused_import
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\character\screens\character_create_screen.dart:20:9 - use_super_parameters
+   info - Statements in an if should be enclosed in a block. Try wrapping the statement in a block - lib\features\character\screens\character_create_screen.dart:283:9 - curly_braces_in_flow_control_structures
+warning - Unused import: '../../../shared/models/index.dart'. Try removing the import directive - lib\features\character\screens\character_detail_screen.dart:10:8 - unused_import
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\character\screens\character_detail_screen.dart:19:9 - use_super_parameters
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check. Guard a 'State.context' use with a 'mounted' check on the State, and other BuildContext use with a 'mounted' check on the BuildContext - lib\features\character\screens\character_detail_screen.dart:262:30 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check. Guard a 'State.context' use with a 'mounted' check on the State, and other BuildContext use with a 'mounted' check on the BuildContext - lib\features\character\screens\character_detail_screen.dart:265:19 - use_build_context_synchronously
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\character\screens\character_favorites_screen.dart:15:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\character\screens\my_characters_screen.dart:12:9 - use_super_parameters
+   info - Statements in an if should be enclosed in a block. Try wrapping the statement in a block - lib\features\chat\providers\chat_provider.dart:154:7 - curly_braces_in_flow_control_structures
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\chat\screens\chat_screen.dart:18:9 - use_super_parameters
+warning - Unused import: '../../../core/theme/app_typography.dart'. Try removing the import directive - lib\features\chat\screens\chats_screen.dart:7:8 - unused_import
+warning - Unused import: '../../../core/theme/app_spacing.dart'. Try removing the import directive - lib\features\chat\screens\chats_screen.dart:8:8 - unused_import
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\chat\screens\chats_screen.dart:14:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\chat\screens\group_create_screen.dart:12:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\chat\widgets\gift_sending_widget.dart:12:9 - use_super_parameters
+  error - Invalid constant value - lib\features\chat\widgets\gift_sending_widget.dart:20:36 - invalid_constant
+  error - Undefined name 'AppBorderRadius'. Try correcting the name to one that is defined, or defining the name - lib\features\chat\widgets\gift_sending_widget.dart:20:36 - undefined_identifier
+  error - Invalid constant value - lib\features\chat\widgets\gift_sending_widget.dart:21:37 - invalid_constant
+  error - Undefined name 'AppBorderRadius'. Try correcting the name to one that is defined, or defining the name - lib\features\chat\widgets\gift_sending_widget.dart:21:37 - undefined_identifier
+   info - Don't use 'BuildContext's across async gaps. Try rewriting the code to not use the 'BuildContext', or guard the use with a 'mounted' check - lib\features\chat\widgets\gift_sending_widget.dart:45:32 - use_build_context_synchronously
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\home\screens\home_screen.dart:17:9 - use_super_parameters
+warning - The value of the local variable 'chatState' isn't used. Try removing the variable or using it - lib\features\home\screens\home_screen.dart:38:11 - unused_local_variable
+  error - The argument type 'BorderRadius' can't be assigned to the parameter type 'double'.  - lib\features\home\screens\home_screen.dart:103:31 - argument_type_not_assignable
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss. Try replacing the use of the deprecated member with the replacement - lib\features\home\screens\home_screen.dart:106:56 - deprecated_member_use
+  error - The argument type 'BorderRadius' can't be assigned to the parameter type 'double'.  - lib\features\home\screens\home_screen.dart:149:31 - argument_type_not_assignable
+warning - Unused import: '../../../core/theme/app_typography.dart'. Try removing the import directive - lib\features\premium\screens\coin_purchase_screen.dart:6:8 - unused_import
+warning - Unused import: '../../../core/services/premium_service.dart'. Try removing the import directive - lib\features\premium\screens\coin_purchase_screen.dart:8:8 - unused_import
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\premium\screens\coin_purchase_screen.dart:11:9 - use_super_parameters
+warning - Unused import: '../../../core/theme/app_typography.dart'. Try removing the import directive - lib\features\premium\screens\image_generation_screen.dart:6:8 - unused_import
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\premium\screens\image_generation_screen.dart:70:9 - use_super_parameters
+warning - Unused import: 'package:ai_companions_flutter/shared/models/profile.dart'. Try removing the import directive - lib\features\profile\providers\user_provider.dart:4:8 - unused_import
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\profile\screens\my_characters_screen.dart:12:9 - use_super_parameters
+   info - The 'child' argument should be last in widget constructor invocations. Try moving the argument to the end of the argument list - lib\features\profile\screens\my_characters_screen.dart:90:9 - sort_child_properties_last
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\profile\screens\profile_screen.dart:13:9 - use_super_parameters
+  error - The method 'maybeWhen' isn't defined for the type 'AuthState'. Try correcting the name to the name of an existing method, or defining a method named 'maybeWhen' - lib\features\profile\screens\profile_screen.dart:26:23 - undefined_method
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\profile\screens\settings_screen.dart:11:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\profile\screens\subscription_screen.dart:11:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\shared\screens\admin_panel_screen.dart:10:9 - use_super_parameters
+warning - Unused import: 'package:go_router/go_router.dart'. Try removing the import directive - lib\features\shared\screens\discover_screen.dart:5:8 - unused_import
+warning - Unused import: '../../../shared/models/index.dart'. Try removing the import directive - lib\features\shared\screens\discover_screen.dart:9:8 - unused_import
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\shared\screens\discover_screen.dart:15:9 - use_super_parameters
+  error - The getter 'error' isn't defined for the type 'CharacterListState'. Try importing the library that defines 'error', correcting the name to the name of an existing getter, or defining a getter or field named 'error' - lib\features\shared\screens\discover_screen.dart:73:25 - undefined_getter
+  error - The getter 'error' isn't defined for the type 'CharacterListState'. Try importing the library that defines 'error', correcting the name to the name of an existing getter, or defining a getter or field named 'error' - lib\features\shared\screens\discover_screen.dart:75:45 - undefined_getter
+  error - The method '_buildCharacterCard' isn't defined for the type '_DiscoverScreenState'. Try correcting the name to the name of an existing method, or defining a method named '_buildCharacterCard' - lib\features\shared\screens\discover_screen.dart:106:40 - undefined_method
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\shared\screens\placeholder_screens.dart:14:9 - use_super_parameters
+  error - The named parameter 'onNotification' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'onNotification' - lib\features\shared\screens\placeholder_screens.dart:175:21 - undefined_named_parameter
+  error - The method 'fetchMore' isn't defined for the type 'CharacterNotifier'. Try correcting the name to the name of an existing method, or defining a method named 'fetchMore' - lib\features\shared\screens\placeholder_screens.dart:179:62 - undefined_method
+   info - Unnecessary use of multiple underscores. Try using '_' - lib\features\shared\screens\placeholder_screens.dart:234:37 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores. Try using '_' - lib\features\shared\screens\placeholder_screens.dart:234:41 - unnecessary_underscores
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\shared\screens\profile_screen.dart:13:9 - use_super_parameters
+warning - Unused import: '../../../core/theme/app_typography.dart'. Try removing the import directive - lib\features\shared\screens\settings_screen.dart:6:8 - unused_import
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\shared\screens\settings_screen.dart:9:9 - use_super_parameters
+warning - Unused import: '../../../core/services/premium_service.dart'. Try removing the import directive - lib\features\shared\screens\subscription_screen.dart:10:8 - unused_import
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\shared\screens\subscription_screen.dart:15:9 - use_super_parameters
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss. Try replacing the use of the deprecated member with the replacement - lib\features\shared\screens\subscription_screen.dart:80:45 - deprecated_member_use
+   info - Unnecessary use of 'toList' in a spread. Try removing the invocation of 'toList' - lib\features\shared\screens\subscription_screen.dart:140:16 - unnecessary_to_list_in_spreads
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\features\shared\widgets\error_display_widget.dart:12:9 - use_super_parameters
+warning - Unused import: 'package:flutter_dotenv/flutter_dotenv.dart'. Try removing the import directive - lib\main.dart:2:8 - unused_import
+  error - Missing concrete implementations of '_$ApiResponse.toJson', 'getter _$ApiResponse.data', 'getter _$ApiResponse.error', 'getter _$ApiResponse.message', and 1 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\api_response.dart:9:7 - non_abstract_class_inherits_abstract_member
+  error - Missing concrete implementations of '_$PaginatedResponse.toJson', 'getter _$PaginatedResponse.data', 'getter _$PaginatedResponse.hasMore', 'getter _$PaginatedResponse.limit', and 2 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\api_response.dart:25:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\api_response.dart:31:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$RegisterRequest.toJson', 'getter _$RegisterRequest.displayName', 'getter _$RegisterRequest.email', 'getter _$RegisterRequest.password', and 1 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\api_response.dart:43:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\api_response.dart:48:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$LoginRequest.toJson', 'getter _$LoginRequest.email', and 'getter _$LoginRequest.password'. Try implementing the missing methods, or make the class abstract - lib\shared\models\api_response.dart:56:7 - non_abstract_class_inherits_abstract_member
+  error - Missing concrete implementations of '_$AuthResponse.toJson', 'getter _$AuthResponse.accessToken', 'getter _$AuthResponse.refreshToken', and 'getter _$AuthResponse.user'. Try implementing the missing methods, or make the class abstract - lib\shared\models\auth_response.dart:10:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\auth_response.dart:13:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\auth_response.dart:14:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$Character.toJson', 'getter _$Character.appearance', 'getter _$Character.avatarUrl', 'getter _$Character.bannerUrl', and 20 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\character.dart:12:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character.dart:18:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character.dart:19:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character.dart:24:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character.dart:25:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character.dart:27:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character.dart:28:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character.dart:29:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character.dart:30:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character.dart:31:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character.dart:32:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character.dart:33:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character.dart:34:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character.dart:35:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character.dart:36:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$CharacterAppearance.toJson', 'getter _$CharacterAppearance.ageAppearance', 'getter _$CharacterAppearance.bodyType', 'getter _$CharacterAppearance.distinguishingFeatures', and 3 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\character_appearance.dart:9:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_appearance.dart:11:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_appearance.dart:12:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_appearance.dart:13:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_appearance.dart:15:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_appearance.dart:16:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$CharacterPersonality.toJson', 'getter _$CharacterPersonality.backstory', 'getter _$CharacterPersonality.communicationStyle', 'getter _$CharacterPersonality.dislikes', and 5 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\character_personality.dart:9:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_personality.dart:13:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_personality.dart:18:6 - invalid_annotation_target
+warning - Unused import: 'character.dart'. Try removing the import directive - lib\shared\models\character_requests.dart:4:8 - unused_import
+  error - Missing concrete implementations of '_$CreateCharacterRequest.toJson', 'getter _$CreateCharacterRequest.appearance', 'getter _$CreateCharacterRequest.avatarUrl', 'getter _$CreateCharacterRequest.bannerUrl', and 11 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\character_requests.dart:12:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_requests.dart:17:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_requests.dart:18:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_requests.dart:23:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_requests.dart:24:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_requests.dart:26:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_requests.dart:27:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$UpdateCharacterRequest.toJson', 'getter _$UpdateCharacterRequest.appearance', 'getter _$UpdateCharacterRequest.avatarUrl', 'getter _$UpdateCharacterRequest.bannerUrl', and 11 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\character_requests.dart:34:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_requests.dart:39:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_requests.dart:40:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_requests.dart:45:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_requests.dart:46:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_requests.dart:48:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_requests.dart:49:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$FavoriteResponse.toJson' and 'getter _$FavoriteResponse.isFavorited'. Try implementing the missing methods, or make the class abstract - lib\shared\models\character_requests.dart:56:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\character_requests.dart:58:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$ConversationData.toJson', 'getter _$ConversationData.conversation', and 'getter _$ConversationData.messages'. Try implementing the missing methods, or make the class abstract - lib\shared\models\chat_responses.dart:11:7 - non_abstract_class_inherits_abstract_member
+  error - Missing concrete implementations of '_$SendMessageResponse.toJson', 'getter _$SendMessageResponse.aiMessage', and 'getter _$SendMessageResponse.userMessage'. Try implementing the missing methods, or make the class abstract - lib\shared\models\chat_responses.dart:21:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\chat_responses.dart:23:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\chat_responses.dart:24:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$RegenerateResponse.toJson' and 'getter _$RegenerateResponse.aiMessage'. Try implementing the missing methods, or make the class abstract - lib\shared\models\chat_responses.dart:31:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\chat_responses.dart:33:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$SendGiftResponse.toJson', 'getter _$SendGiftResponse.aiMessage', 'getter _$SendGiftResponse.gift', 'getter _$SendGiftResponse.giftMessage', and 1 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\chat_responses.dart:40:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\chat_responses.dart:42:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\chat_responses.dart:43:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\chat_responses.dart:45:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$CoinTransaction.toJson', 'getter _$CoinTransaction.amount', 'getter _$CoinTransaction.balanceAfter', 'getter _$CoinTransaction.createdAt', and 5 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\coin_transaction.dart:10:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\coin_transaction.dart:13:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\coin_transaction.dart:15:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\coin_transaction.dart:18:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\coin_transaction.dart:19:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$Conversation.toJson', 'getter _$Conversation.character', 'getter _$Conversation.characterId', 'getter _$Conversation.createdAt', and 9 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\conversation.dart:11:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\conversation.dart:14:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\conversation.dart:15:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\conversation.dart:16:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\conversation.dart:17:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\conversation.dart:18:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\conversation.dart:19:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\conversation.dart:20:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\conversation.dart:21:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\conversation.dart:22:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\conversation.dart:23:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$GenerationRequest.toJson', 'getter _$GenerationRequest.coinCost', 'getter _$GenerationRequest.createdAt', 'getter _$GenerationRequest.errorMessage', and 7 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\generation_request.dart:10:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\generation_request.dart:13:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\generation_request.dart:17:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\generation_request.dart:18:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\generation_request.dart:19:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\generation_request.dart:20:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\generation_request.dart:21:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$Gift.toJson', 'getter _$Gift.id', 'getter _$Gift.imageUrl', 'getter _$Gift.name', and 1 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\gift.dart:7:7 - non_abstract_class_inherits_abstract_member
+  error - Missing concrete implementations of '_$GroupMessageResponse.toJson', 'getter _$GroupMessageResponse.aiMessages', and 'getter _$GroupMessageResponse.userMessage'. Try implementing the missing methods, or make the class abstract - lib\shared\models\group_responses.dart:10:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\group_responses.dart:12:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\group_responses.dart:13:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$MemoryFact.toJson', 'getter _$MemoryFact.confidence', 'getter _$MemoryFact.key', and 'getter _$MemoryFact.value'. Try implementing the missing methods, or make the class abstract - lib\shared\models\memory_fact.dart:9:7 - non_abstract_class_inherits_abstract_member
+  error - Missing concrete implementations of '_$Message.toJson', 'getter _$Message.audioUrl', 'getter _$Message.character', 'getter _$Message.characterId', and 7 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\message.dart:10:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\message.dart:13:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\message.dart:14:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\message.dart:15:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\message.dart:18:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\message.dart:19:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\message.dart:20:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\message.dart:21:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$MessageCharacter.toJson', 'getter _$MessageCharacter.avatarUrl', 'getter _$MessageCharacter.id', 'getter _$MessageCharacter.name', and 1 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\message.dart:29:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\message.dart:33:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\message.dart:34:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$SubscriptionResponse.toJson' and 'getter _$SubscriptionResponse.subscription'. Try implementing the missing methods, or make the class abstract - lib\shared\models\premium_responses.dart:10:7 - non_abstract_class_inherits_abstract_member
+  error - Missing concrete implementations of '_$Profile.toJson', 'getter _$Profile.avatarUrl', 'getter _$Profile.bio', 'getter _$Profile.coinBalance', and 9 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\profile.dart:10:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\profile.dart:14:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\profile.dart:15:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\profile.dart:17:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\profile.dart:18:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\profile.dart:21:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\profile.dart:22:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\profile.dart:23:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\profile.dart:24:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\profile.dart:25:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$Subscription.toJson', 'getter _$Subscription.createdAt', 'getter _$Subscription.currentPeriodEnd', 'getter _$Subscription.currentPeriodStart', and 6 more. Try implementing the missing methods, or make the class abstract - lib\shared\models\subscription.dart:10:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\subscription.dart:13:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\subscription.dart:17:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\subscription.dart:18:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\subscription.dart:19:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\subscription.dart:20:6 - invalid_annotation_target
+  error - Missing concrete implementations of '_$VoiceResponse.toJson', 'getter _$VoiceResponse.audioUrl', and 'getter _$VoiceResponse.newBalance'. Try implementing the missing methods, or make the class abstract - lib\shared\models\voice_responses.dart:9:7 - non_abstract_class_inherits_abstract_member
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\voice_responses.dart:11:6 - invalid_annotation_target
+warning - The annotation 'JsonKey.new' can only be used on fields or getters - lib\shared\models\voice_responses.dart:12:6 - invalid_annotation_target
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\shared\widgets\empty_state_widget.dart:10:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter. Trying converting 'key' to a super parameter - lib\shared\widgets\loading_widget.dart:5:9 - use_super_parameters
+

@@ -1,0 +1,54 @@
+{
+  "login": {
+    "title": "AI Companions",
+    "subtitle": "Sign in to continue",
+    "emailHint": "Email",
+    "passwordHint": "Password",
+    "forgotPassword": "Forgot password?",
+    "signInButton": "Sign In",
+    "noAccount": "Don't have an account? ",
+    "signUpLink": "Sign Up"
+  },
+  "register": {
+    "title": "Create Account",
+    "subtitle": "Join AI Companions",
+    "emailHint": "Email",
+    "usernameHint": "Username",
+    "displayNameHint": "Display Name (optional)",
+    "passwordHint": "Password",
+    "signUpButton": "Sign Up",
+    "haveAccount": "Already have an account? ",
+    "signInLink": "Sign In"
+  },
+  "discover": {
+    "title": "Discover",
+    "searchHint": "Search characters..."
+  },
+  "chats": {
+    "title": "Chats",
+    "noChats": "No chats yet"
+  },
+  "profile": {
+    "title": "Profile"
+  },
+  "myCharacters": {
+    "title": "My Characters",
+    "noCharacters": "You haven't created any characters yet",
+    "createButton": "Create Character"
+  },
+  "favorites": {
+    "title": "Favorites",
+    "noFavorites": "No favorites yet"
+  },
+  "characterDetail": {
+    "about": "About",
+    "personality": "Personality",
+    "startChat": "Start Chat"
+  },
+  "subscription": {
+    "title": "Subscription",
+    "currentPlan": "Current Plan",
+    "availablePlans": "Available Plans",
+    "upgrade": "Upgrade"
+  }
+}

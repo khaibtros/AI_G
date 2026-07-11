@@ -231,33 +231,36 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
             AppSpacing.base,
             0,
           ),
-          child: Row(
-            children: [
-              _buildFilterChip(
-                label:
-                    'Sort: ${_sortLabels[state.filters['sort']] ?? 'Popular'}',
-                onTap: () => setState(() => _activeDropdown = 'sort'),
-              ),
-              const SizedBox(width: AppSpacing.xs),
-              _buildFilterChip(
-                label: 'Gender: ${_genderLabel(state.filters['gender'])}',
-                onTap: () => setState(() => _activeDropdown = 'gender'),
-                showArrow: true,
-              ),
-              const SizedBox(width: AppSpacing.xs),
-              _buildFilterChip(
-                label: 'Style: ${_styleLabel(state.filters['style'])}',
-                onTap: () => setState(() => _activeDropdown = 'style'),
-                showArrow: true,
-              ),
-            ],
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                _buildFilterChip(
+                  label:
+                      'Sort: ${_sortLabels[state.filters['sort']] ?? 'Popular'}',
+                  onTap: () => setState(() => _activeDropdown = 'sort'),
+                ),
+                const SizedBox(width: AppSpacing.xs),
+                _buildFilterChip(
+                  label: 'Gender: ${_genderLabel(state.filters['gender'])}',
+                  onTap: () => setState(() => _activeDropdown = 'gender'),
+                  showArrow: true,
+                ),
+                const SizedBox(width: AppSpacing.xs),
+                _buildFilterChip(
+                  label: 'Style: ${_styleLabel(state.filters['style'])}',
+                  onTap: () => setState(() => _activeDropdown = 'style'),
+                  showArrow: true,
+                ),
+              ],
+            ),
           ),
         ),
 
         // Tag Chips
         Container(
           height: 50,
-          margin: const EdgeInsets.only(top: AppSpacing.lg),
+          margin: const EdgeInsets.only(top: AppSpacing.lg, bottom: AppSpacing.base),
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.base),
@@ -306,37 +309,35 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
     required VoidCallback onTap,
     bool showArrow = false,
   }) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-          decoration: BoxDecoration(
-            color: AppColors.surfaceElevated,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: AppColors.inputBorder),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                label,
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: AppColors.surfaceElevated,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: AppColors.inputBorder),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              label,
+              style: const TextStyle(
+                fontSize: 12,
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
               ),
-              if (showArrow) ...[
-                const SizedBox(width: 4),
-                const Icon(
-                  Icons.keyboard_arrow_down,
-                  size: 14,
-                  color: Colors.white,
-                ),
-              ],
+            ),
+            if (showArrow) ...[
+              const SizedBox(width: 4),
+              const Icon(
+                Icons.keyboard_arrow_down,
+                size: 14,
+                color: Colors.white,
+              ),
             ],
-          ),
+          ],
         ),
       ),
     );

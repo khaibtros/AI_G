@@ -1651,6 +1651,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               ),
               child: TextField(
                 controller: messageController,
+                onChanged: (_) => setState(() {}),
                 style: const TextStyle(
                   fontSize: 14,
                   color: AppColors.textPrimary,

@@ -50,7 +50,7 @@ export class GenerationService {
         style: (style === 'natural' ? 'natural' : 'vivid') as 'vivid' | 'natural',
       });
 
-      const imageUrl = response.data?.[0]?.url;
+      const imageUrl = response.data && response.data[0] ? response.data[0].url : undefined;
       if (!imageUrl) throw new Error('No image URL returned');
 
       // Upload to Supabase Storage

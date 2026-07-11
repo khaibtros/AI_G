@@ -38,6 +38,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       if (isAuthenticated && location == '/login') {
         return '/home';
       }
+      if (isAuthenticated &&
+          authState.user?.isAdmin == true &&
+          location == '/home') {
+        return '/admin';
+      }
       if (location.startsWith('/admin') && authState.user?.isAdmin != true) {
         return '/home';
       }

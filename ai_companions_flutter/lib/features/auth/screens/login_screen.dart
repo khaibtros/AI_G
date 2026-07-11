@@ -146,10 +146,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   passwordController.text,
                                 );
                                 if (mounted) {
-                                  final email = emailController.text
-                                      .trim()
-                                      .toLowerCase();
-                                  if (email == 'vankhai15052005@gmail.com') {
+                                  final currentUser =
+                                      ref.read(authProvider).user;
+                                  if (currentUser?.isAdmin == true) {
                                     context.go('/admin');
                                   } else {
                                     context.go('/home');

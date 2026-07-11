@@ -97,14 +97,14 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             ChatScreen(conversationId: state.pathParameters['conversationId']!),
       ),
       GoRoute(
+        path: '/character/create',
+        builder: (context, state) => const CharacterCreateScreen(),
+      ),
+      GoRoute(
         path: '/character/:characterId',
         builder: (context, state) => CharacterDetailScreen(
           characterId: state.pathParameters['characterId']!,
         ),
-      ),
-      GoRoute(
-        path: '/character/create',
-        builder: (context, state) => const CharacterCreateScreen(),
       ),
       GoRoute(
         path: '/character/favorites',

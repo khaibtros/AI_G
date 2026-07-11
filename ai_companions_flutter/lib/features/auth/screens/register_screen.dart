@@ -146,9 +146,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                 );
                                 if (mounted) context.go('/home');
                               } catch (e) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(e.toString())),
-                                );
+                                if (mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(e.toString())),
+                                  );
+                                }
                               }
                             }
                           },

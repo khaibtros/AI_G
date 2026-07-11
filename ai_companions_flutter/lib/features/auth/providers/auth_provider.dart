@@ -32,6 +32,19 @@ class AuthState {
       error: error ?? this.error,
     );
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AuthState &&
+          runtimeType == other.runtimeType &&
+          user == other.user &&
+          isAuthenticated == other.isAuthenticated &&
+          isLoading == other.isLoading &&
+          error == other.error;
+
+  @override
+  int get hashCode => Object.hash(user, isAuthenticated, isLoading, error);
 }
 
 class AuthNotifier extends Notifier<AuthState> {
@@ -93,10 +106,11 @@ class AuthNotifier extends Notifier<AuthState> {
       if (hasToken) {
         final profile = await _authService.getProfile();
         state = AuthState(user: profile, isAuthenticated: true);
+      } else {
+        state = AuthState();
       }
     } catch (e) {
       AppLogger.error('Failed to load profile', e);
-      state = AuthState();
     }
   }
 
@@ -114,16 +128,13 @@ class AuthNotifier extends Notifier<AuthState> {
   }
 
   Future<void> checkAuth() async {
-    state = state.copyWith(isLoading: true);
-    try {
-      final hasToken = await _authService.hasToken();
-      if (hasToken) {
-        await loadProfile();
+    final hasToken = await _authService.hasToken();
+    if (hasToken) {
+      if (state.isAuthenticated && state.user != null) return;
+      await loadProfile();
+      if (!state.isAuthenticated) {
+        await _authService.logout();
       }
-    } catch (e) {
-      AppLogger.error('Auth check failed', e);
-    } finally {
-      state = state.copyWith(isLoading: false);
     }
   }
 

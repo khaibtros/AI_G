@@ -27,7 +27,7 @@ class _CharacterDetailScreenState extends ConsumerState<CharacterDetailScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       ref
           .read(characterProvider.notifier)
           .fetchCharacterById(widget.characterId);

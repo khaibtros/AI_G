@@ -15,6 +15,8 @@ class ChatState {
   final bool isStreaming;
   final bool isSendingGift;
 
+  static const _sentinel = Object();
+
   ChatState({
     this.conversations = const [],
     this.activeConversation,
@@ -29,7 +31,7 @@ class ChatState {
 
   ChatState copyWith({
     List<Conversation>? conversations,
-    Conversation? activeConversation,
+    Object? activeConversation = _sentinel,
     List<Message>? messages,
     bool? isLoading,
     bool? isSending,
@@ -40,7 +42,9 @@ class ChatState {
   }) {
     return ChatState(
       conversations: conversations ?? this.conversations,
-      activeConversation: activeConversation ?? this.activeConversation,
+      activeConversation: identical(activeConversation, _sentinel)
+          ? this.activeConversation
+          : activeConversation as Conversation?,
       messages: messages ?? this.messages,
       isLoading: isLoading ?? this.isLoading,
       isSending: isSending ?? this.isSending,
@@ -153,9 +157,11 @@ class ChatNotifier extends Notifier<ChatState> {
         state.isStreaming)
       return;
 
+    final conversationId = state.activeConversation!.id;
+
     final tempUserMsg = Message(
       id: 'temp-${DateTime.now().millisecondsSinceEpoch}',
-      conversationId: state.activeConversation!.id,
+      conversationId: conversationId,
       senderType: SenderType.user,
       content: content,
       createdAt: DateTime.now().toIso8601String(),
@@ -170,7 +176,7 @@ class ChatNotifier extends Notifier<ChatState> {
 
     try {
       await ChatService.instance.streamMessage(
-        state.activeConversation!.id,
+        conversationId,
         content,
         onUserMessage: (msg) {
           state = state.copyWith(

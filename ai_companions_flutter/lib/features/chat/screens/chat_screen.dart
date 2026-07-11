@@ -1059,10 +1059,25 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   void initState() {
     super.initState();
     messageController = TextEditingController();
-    Future.microtask(() {
-      ref.read(chatProvider.notifier).loadConversation(widget.conversationId);
-      ref.read(authProvider.notifier).loadProfile();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      _loadData();
     });
+  }
+
+  Future<void> _loadData() async {
+    try {
+      await ref.read(chatProvider.notifier).loadConversation(widget.conversationId);
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to load conversation: $e')),
+        );
+      }
+    }
+    if (mounted) {
+      ref.read(authProvider.notifier).loadProfile();
+    }
   }
 
   @override
@@ -1186,6 +1201,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
   void _handleDeleteMessage() {
     if (_actionMessage == null) return;
+    final messageToDelete = _actionMessage!;
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -1205,7 +1221,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           ),
           TextButton(
             onPressed: () {
-              ref.read(chatProvider.notifier).deleteMessage(_actionMessage!.id);
+              ref.read(chatProvider.notifier).deleteMessage(messageToDelete.id);
               setState(() {
                 _showActions = false;
                 _actionMessage = null;

@@ -41,8 +41,16 @@ class GiftSendingWidget extends ConsumerWidget {
               final gift = AppConstants.gifts[index];
               return GestureDetector(
                 onTap: () async {
-                  await ref.read(chatProvider.notifier).sendGift(gift.id);
-                  Navigator.of(context).pop();
+                  try {
+                    await ref.read(chatProvider.notifier).sendGift(gift.id);
+                    if (context.mounted) Navigator.of(context).pop();
+                  } catch (e) {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Failed to send gift: $e')),
+                      );
+                    }
+                  }
                 },
                 child: Column(
                   children: [

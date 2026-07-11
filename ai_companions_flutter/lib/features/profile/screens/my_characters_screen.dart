@@ -19,9 +19,9 @@ class _MyCharactersScreenState extends ConsumerState<MyCharactersScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-      () => ref.read(characterProvider.notifier).fetchMyCharacters(),
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(characterProvider.notifier).fetchMyCharacters();
+    });
   }
 
   @override

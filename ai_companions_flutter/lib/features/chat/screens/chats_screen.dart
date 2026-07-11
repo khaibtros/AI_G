@@ -18,7 +18,7 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(chatProvider.notifier).fetchConversations();
     });
   }

@@ -30,8 +30,8 @@ abstract class Character with _$Character {
     @JsonKey(name: 'is_official') @Default(false) bool isOfficial,
     @JsonKey(name: 'is_nsfw') @Default(false) bool isNsfw,
     @JsonKey(name: 'creator_id') String? creatorId,
-    @JsonKey(name: 'created_at') required String createdAt,
-    @JsonKey(name: 'updated_at') required String updatedAt,
+    @JsonKey(name: 'created_at') @Default('') String createdAt,
+    @JsonKey(name: 'updated_at') @Default('') String updatedAt,
     @JsonKey(name: 'is_favorited') bool? isFavorited,
     @JsonKey(name: 'voice_id') String? voiceId,
   }) = _Character;

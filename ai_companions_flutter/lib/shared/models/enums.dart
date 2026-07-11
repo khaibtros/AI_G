@@ -1,5 +1,7 @@
 // Enums for the application
 
+import 'package:json_annotation/json_annotation.dart';
+
 enum SubscriptionTier {
   free,
   starter,
@@ -44,6 +46,7 @@ enum CharacterStyle {
   anime,
   realistic,
   cartoon,
+  @JsonValue('3d')
   threeD,
   pixel;
 
@@ -98,6 +101,7 @@ enum CharacterStyle {
 enum CharacterGender {
   male,
   female,
+  @JsonValue('non-binary')
   nonBinary,
   other;
 

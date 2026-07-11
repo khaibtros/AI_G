@@ -42,8 +42,8 @@ _Character _$CharacterFromJson(Map<String, dynamic> json) => _Character(
   isOfficial: json['is_official'] as bool? ?? false,
   isNsfw: json['is_nsfw'] as bool? ?? false,
   creatorId: json['creator_id'] as String?,
-  createdAt: json['created_at'] as String,
-  updatedAt: json['updated_at'] as String,
+  createdAt: json['created_at'] as String? ?? '',
+  updatedAt: json['updated_at'] as String? ?? '',
   isFavorited: json['is_favorited'] as bool?,
   voiceId: json['voice_id'] as String?,
 );
@@ -79,13 +79,13 @@ const _$CharacterStyleEnumMap = {
   CharacterStyle.anime: 'anime',
   CharacterStyle.realistic: 'realistic',
   CharacterStyle.cartoon: 'cartoon',
-  CharacterStyle.threeD: 'threeD',
+  CharacterStyle.threeD: '3d',
   CharacterStyle.pixel: 'pixel',
 };
 
 const _$CharacterGenderEnumMap = {
   CharacterGender.male: 'male',
   CharacterGender.female: 'female',
-  CharacterGender.nonBinary: 'nonBinary',
+  CharacterGender.nonBinary: 'non-binary',
   CharacterGender.other: 'other',
 };

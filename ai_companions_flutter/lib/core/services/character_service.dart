@@ -22,18 +22,20 @@ class CharacterService {
     bool? isNsfw,
   }) async {
     try {
+      final queryParams = <String, dynamic>{
+        if (page != null) 'page': page,
+        if (limit != null) 'limit': limit,
+        if (gender != null && gender.isNotEmpty) 'gender': gender,
+        if (style != null && style.isNotEmpty) 'style': style,
+        if (category != null && category.isNotEmpty) 'category': category,
+        if (sort != null && sort.isNotEmpty) 'sort': sort,
+        if (search != null && search.isNotEmpty) 'search': search,
+        if (isNsfw != null) 'is_nsfw': isNsfw,
+      };
+
       final response = await _dio.get(
         '/characters',
-        queryParameters: {
-          'page': page,
-          'limit': limit,
-          'gender': gender,
-          'style': style,
-          'category': category,
-          'sort': sort,
-          'search': search,
-          'is_nsfw': isNsfw,
-        },
+        queryParameters: queryParams,
       );
 
       return PaginatedResponse.fromJson(
@@ -57,10 +59,7 @@ class CharacterService {
 
   Future<Character> create(CreateCharacterRequest request) async {
     try {
-      final response = await _dio.post(
-        '/characters',
-        data: request.toJson(),
-      );
+      final response = await _dio.post('/characters', data: request.toJson());
       final data = response.data['data'] as Map<String, dynamic>;
       return Character.fromJson(data);
     } catch (e) {
@@ -103,7 +102,9 @@ class CharacterService {
     try {
       final response = await _dio.get('/characters/me');
       final data = response.data['data'] as List;
-      return data.map((e) => Character.fromJson(e as Map<String, dynamic>)).toList();
+      return data
+          .map((e) => Character.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       rethrow;
     }
@@ -113,10 +114,11 @@ class CharacterService {
     try {
       final response = await _dio.get('/user/favorites');
       final data = response.data['data'] as List;
-      return data.map((e) => Character.fromJson(e as Map<String, dynamic>)).toList();
+      return data
+          .map((e) => Character.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       rethrow;
     }
   }
 }
-

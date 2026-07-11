@@ -163,7 +163,8 @@ class _GiftPickerModalState extends ConsumerState<GiftPickerModal> {
             minChildSize: 0.4,
             maxChildSize: 0.85,
             builder: (context, scrollController) {
-              return Container(
+              return SelectionContainer.disabled(
+                child: Container(
                 decoration: const BoxDecoration(
                   color: AppColors.surface,
                   borderRadius: BorderRadius.only(
@@ -185,12 +186,13 @@ class _GiftPickerModalState extends ConsumerState<GiftPickerModal> {
                       ),
                     ),
                     const SizedBox(height: AppSpacing.md),
-                    Text('Send a Gift', style: AppTypography.h4),
+                    Text('Send a Gift', style: AppTypography.h4.copyWith(decoration: TextDecoration.none)),
                     const SizedBox(height: 4),
                     Text(
                       'Show your appreciation with a virtual gift',
                       style: AppTypography.bodySmall.copyWith(
                         color: AppColors.textSecondary,
+                        decoration: TextDecoration.none,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.sm),
@@ -221,6 +223,7 @@ class _GiftPickerModalState extends ConsumerState<GiftPickerModal> {
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
                               color: AppColors.accentGold,
+                              decoration: TextDecoration.none,
                             ),
                           ),
                         ],
@@ -235,7 +238,7 @@ class _GiftPickerModalState extends ConsumerState<GiftPickerModal> {
                         ),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 4,
-                          childAspectRatio: 0.85,
+                          childAspectRatio: 0.78,
                           crossAxisSpacing: AppSpacing.sm,
                           mainAxisSpacing: AppSpacing.sm,
                         ),
@@ -283,6 +286,7 @@ class _GiftPickerModalState extends ConsumerState<GiftPickerModal> {
                                       fontSize: 10,
                                       color: AppColors.textPrimary,
                                       fontWeight: FontWeight.w600,
+                                      decoration: TextDecoration.none,
                                     ),
                                     textAlign: TextAlign.center,
                                     maxLines: 1,
@@ -302,6 +306,7 @@ class _GiftPickerModalState extends ConsumerState<GiftPickerModal> {
                                           fontSize: 10,
                                           color: AppColors.accentGold,
                                           fontWeight: FontWeight.w700,
+                                          decoration: TextDecoration.none,
                                         ),
                                       ),
                                     ],
@@ -312,6 +317,7 @@ class _GiftPickerModalState extends ConsumerState<GiftPickerModal> {
                                       fontSize: 8,
                                       fontWeight: FontWeight.w800,
                                       color: rColor,
+                                      decoration: TextDecoration.none,
                                     ),
                                   ),
                                 ],
@@ -342,21 +348,23 @@ class _GiftPickerModalState extends ConsumerState<GiftPickerModal> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(
-                                    _selectedGift!.name,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.textPrimary,
-                                    ),
-                                  ),
-                                  Text(
-                                    '+${_selectedGift!.affinity} affinity',
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: AppColors.accentPink,
-                                    ),
-                                  ),
+                                   Text(
+                                     _selectedGift!.name,
+                                     style: const TextStyle(
+                                       fontSize: 16,
+                                       fontWeight: FontWeight.w600,
+                                       color: AppColors.textPrimary,
+                                       decoration: TextDecoration.none,
+                                     ),
+                                   ),
+                                   Text(
+                                     '+${_selectedGift!.affinity} affinity',
+                                     style: const TextStyle(
+                                       fontSize: 12,
+                                       color: AppColors.accentPink,
+                                       decoration: TextDecoration.none,
+                                     ),
+                                   ),
                                 ],
                               ),
                             ),
@@ -411,6 +419,7 @@ class _GiftPickerModalState extends ConsumerState<GiftPickerModal> {
                         ),
                       ),
                   ],
+                ),
                 ),
               );
             },
@@ -1635,7 +1644,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           const SizedBox(width: AppSpacing.xs),
           Expanded(
             child: Container(
-              constraints: const BoxConstraints(maxHeight: 120),
               decoration: BoxDecoration(
                 color: AppColors.inputBg,
                 borderRadius: AppBorderRadius.xl,
@@ -1644,16 +1652,18 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               child: TextField(
                 controller: messageController,
                 style: const TextStyle(
-                  fontSize: 15,
+                  fontSize: 14,
                   color: AppColors.textPrimary,
                 ),
-                maxLines: 5,
+                maxLines: null,
                 maxLength: 5000,
+                minLines: 1,
                 decoration: const InputDecoration(
                   border: InputBorder.none,
+                  isDense: true,
                   contentPadding: EdgeInsets.symmetric(
                     horizontal: AppSpacing.base,
-                    vertical: AppSpacing.md,
+                    vertical: 10,
                   ),
                   counterText: '',
                   hintText: 'Type a message...',

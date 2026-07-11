@@ -97,62 +97,76 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         child: GestureDetector(
                           onTap: () => context.push('/subscription'),
                           child: Container(
-                            padding: const EdgeInsets.all(AppSpacing.lg),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.base,
+                              vertical: AppSpacing.md,
+                            ),
                             decoration: BoxDecoration(
                               gradient: const LinearGradient(
                                 colors: [Color(0xFF1a1040), Color(0xFF2d1b69)],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                               ),
-                              borderRadius: AppBorderRadius.xl,
+                              borderRadius: AppBorderRadius.lg,
                               border: Border.all(
                                 color: AppColors.primary.withOpacity(0.3),
                               ),
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Row(
                               children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: AppSpacing.md,
-                                    vertical: AppSpacing.xs,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.primary.withOpacity(0.3),
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                  child: const Text(
-                                    '✨ New Pro Tier',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: AppColors.primaryLight,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: AppSpacing.sm,
+                                          vertical: 2,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: AppColors.primary.withOpacity(0.3),
+                                          borderRadius: BorderRadius.circular(50),
+                                        ),
+                                        child: const Text(
+                                          '✨ New Pro Tier',
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                            color: AppColors.primaryLight,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: AppSpacing.sm),
+                                      const Text(
+                                        'Unlock Unlimited Messages',
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w700,
+                                          color: AppColors.textPrimary,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 2),
+                                      const Text(
+                                        'Chat as much as you want with no limits',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: AppColors.textSecondary,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                const SizedBox(height: AppSpacing.sm),
-                                const Text(
-                                  'Unlock Unlimited Messages',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    color: AppColors.textPrimary,
-                                  ),
-                                ),
-                                const SizedBox(height: AppSpacing.xs),
-                                const Text(
-                                  'Chat as much as you want with no limits',
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: AppColors.textSecondary,
-                                  ),
+                                const Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 16,
+                                  color: AppColors.primaryLight,
                                 ),
                               ],
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: AppSpacing.lg),
+                      const SizedBox(height: AppSpacing.md),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: AppSpacing.base,
@@ -160,20 +174,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         child: GestureDetector(
                           onTap: () => context.push('/character/create'),
                           child: Container(
-                            height: 54,
+                            height: 46,
                             decoration: BoxDecoration(
-                              borderRadius: AppBorderRadius.xl,
+                              borderRadius: AppBorderRadius.lg,
                               gradient: AppColors.primaryGradient,
                             ),
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.auto_awesome, color: Colors.white),
+                                Icon(Icons.auto_awesome, color: Colors.white, size: 18),
                                 SizedBox(width: AppSpacing.sm),
                                 Text(
                                   'Create New Companion',
                                   style: TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white,
                                   ),

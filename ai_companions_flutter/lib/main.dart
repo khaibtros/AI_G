@@ -36,7 +36,9 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     super.initState();
-    ref.read(authProvider.notifier).checkAuth();
+    Future(() {
+      ref.read(authProvider.notifier).checkAuth();
+    });
   }
 
   @override

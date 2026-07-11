@@ -101,6 +101,7 @@ flutter:
     - assets/icons/
     - assets/animations/
     - assets/fonts/
+    - assets/translations/
     - .env
 
   fonts:

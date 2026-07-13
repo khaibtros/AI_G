@@ -13,12 +13,12 @@ import '../../features/profile/screens/subscription_screen.dart';
 import '../../features/profile/screens/settings_screen.dart';
 import '../../features/profile/screens/my_characters_screen.dart';
 import '../../features/character/screens/character_favorites_screen.dart';
-import '../../features/admin/screens/admin_users_screen.dart';
 import '../../features/character/screens/character_detail_screen.dart';
 import '../../features/character/screens/character_create_screen.dart';
 import '../../features/chat/screens/group_create_screen.dart';
 import '../../features/admin/screens/admin_dashboard_screen.dart';
-import '../../features/admin/screens/admin_characters_screen.dart';
+import '../../features/admin/screens/admin_transactions_screen.dart';
+import '../../features/admin/screens/admin_settings_screen.dart';
 import '../../features/auth/providers/auth_provider.dart';
 import '../../features/premium/screens/coin_purchase_screen.dart';
 import '../../features/premium/screens/image_generation_screen.dart';
@@ -32,10 +32,12 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     redirect: (context, state) {
       final location = state.matchedLocation;
 
-      if (!isAuthenticated && location != '/login' && location != '/register') {
+      final isAuthRoute = location == '/login' || location == '/register' || location == '/forgot-password';
+
+      if (!isAuthenticated && !isAuthRoute) {
         return '/login';
       }
-      if (isAuthenticated && location == '/login') {
+      if (isAuthenticated && isAuthRoute) {
         return '/home';
       }
       if (isAuthenticated &&
@@ -140,12 +142,12 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const AdminDashboardScreen(),
       ),
       GoRoute(
-        path: '/admin/users',
-        builder: (context, state) => const AdminUsersScreen(),
+        path: '/admin/transactions',
+        builder: (context, state) => const AdminTransactionsScreen(),
       ),
       GoRoute(
-        path: '/admin/characters',
-        builder: (context, state) => const AdminCharactersScreen(),
+        path: '/admin/settings',
+        builder: (context, state) => const AdminSettingsScreen(),
       ),
       GoRoute(
         path: '/generate',

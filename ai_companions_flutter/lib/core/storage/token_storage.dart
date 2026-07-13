@@ -10,9 +10,7 @@ class TokenStorage {
 
   static final TokenStorage instance = TokenStorage._();
 
-  final _secureStorage = const FlutterSecureStorage(
-    aOptions: AndroidOptions(encryptedSharedPreferences: true),
-  );
+  final _secureStorage = const FlutterSecureStorage();
 
   // Keys
   static const String _accessTokenKey = 'access_token';

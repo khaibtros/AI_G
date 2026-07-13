@@ -13,6 +13,7 @@ class AuthService implements IAuthService {
 
   Dio get _dio => DioClient.instance.dio;
 
+  @override
   Future<AuthResponse> register({
     required String email,
     required String password,
@@ -39,6 +40,7 @@ class AuthService implements IAuthService {
     }
   }
 
+  @override
   Future<AuthResponse> login({
     required String email,
     required String password,
@@ -58,10 +60,12 @@ class AuthService implements IAuthService {
     }
   }
 
+  @override
   Future<void> logout() async {
     await TokenStorage.instance.clearTokens();
   }
 
+  @override
   Future<void> forgotPassword(String email) async {
     try {
       await _dio.post('/auth/forgot-password', data: {'email': email});
@@ -70,6 +74,7 @@ class AuthService implements IAuthService {
     }
   }
 
+  @override
   Future<Profile> getProfile() async {
     try {
       final response = await _dio.get('/user/profile');
@@ -80,6 +85,7 @@ class AuthService implements IAuthService {
     }
   }
 
+  @override
   Future<Profile> updateProfile({String? displayName, String? bio}) async {
     try {
       final response = await _dio.put(
@@ -93,6 +99,7 @@ class AuthService implements IAuthService {
     }
   }
 
+  @override
   Future<bool> hasToken() async {
     final token = await TokenStorage.instance.getAccessToken();
     return token != null;

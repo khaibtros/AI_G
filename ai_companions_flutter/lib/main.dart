@@ -46,6 +46,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     final router = ref.watch(goRouterProvider);
 
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false, // <-- Thêm dòng này ở đây
       title: 'AI Companions',
       theme: AppTheme.darkTheme,
       localizationsDelegates: context.localizationDelegates,

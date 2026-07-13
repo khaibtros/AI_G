@@ -81,7 +81,7 @@ class AppColors {
   );
 
   static LinearGradient featuredOverlay = LinearGradient(
-    colors: [Colors.transparent, Colors.black.withOpacity(0.85)],
+    colors: [Colors.transparent, Colors.black.withAlpha(217)],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );

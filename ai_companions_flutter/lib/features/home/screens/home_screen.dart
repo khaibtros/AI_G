@@ -343,6 +343,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         Image.network(
                                           character.avatarUrl!,
                                           fit: BoxFit.cover,
+                                          alignment: Alignment.topCenter,
                                           width: double.infinity,
                                           height: double.infinity,
                                           errorBuilder: (_, __, ___) =>

@@ -186,6 +186,18 @@ class CharacterNotifier extends Notifier<CharacterListState> {
     }
   }
 
+  Future<bool> deleteCharacter(String id) async {
+    try {
+      await CharacterService.instance.delete(id);
+      state = state.copyWith(
+        myCharacters: state.myCharacters.where((c) => c.id != id).toList(),
+      );
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<void> fetchMore() async {
     if (state.isLoading || state.isLoadingMore || !state.hasMore) return;
     await fetchCharacters();

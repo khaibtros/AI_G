@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
 import { env, validateEnv } from './config/env';
 import { logger } from './utils/logger';
 import { errorHandler } from './middleware/errorHandler';
@@ -41,6 +42,9 @@ app.use('/api/v1/groups', groupRoutes);
 app.use('/api/v1/voice', voiceRoutes);
 app.use('/api/v1/notifications', notificationRoutes);
 app.use('/api/v1/admin', adminRoutes);
+
+// Static files (character images)
+app.use('/images', express.static(path.join(__dirname, '../public/images')));
 
 // 404 handler
 app.use((_req: express.Request, res: express.Response) => {

@@ -93,9 +93,49 @@ class _MyCharactersScreenState extends ConsumerState<MyCharactersScreen> {
     );
   }
 
+  void _confirmDeleteCharacter(Character character) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.surface,
+        title: const Text('Delete Character'),
+        content: Text(
+          'Are you sure you want to delete "${character.name}"? This cannot be undone.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(ctx);
+              final success = await ref
+                  .read(characterProvider.notifier)
+                  .deleteCharacter(character.id);
+              if (mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      success ? 'Character deleted' : 'Failed to delete',
+                    ),
+                    backgroundColor: success ? AppColors.success : AppColors.error,
+                  ),
+                );
+              }
+            },
+            style: TextButton.styleFrom(foregroundColor: AppColors.error),
+            child: const Text('Delete'),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildCharacterCard(BuildContext context, Character character) {
     return GestureDetector(
       onTap: () => context.push('/character/${character.id}'),
+      onLongPress: () => _confirmDeleteCharacter(character),
       child: ClipRRect(
         borderRadius: AppBorderRadius.lg,
         child: Container(
@@ -113,6 +153,25 @@ class _MyCharactersScreenState extends ConsumerState<MyCharactersScreen> {
                     color: AppColors.textMuted,
                   ),
                 ),
+              Positioned(
+                top: 4,
+                right: 4,
+                child: GestureDetector(
+                  onTap: () => _confirmDeleteCharacter(character),
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: Colors.black54,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.delete_outline,
+                      size: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
               Positioned(
                 bottom: 0,
                 left: 0,

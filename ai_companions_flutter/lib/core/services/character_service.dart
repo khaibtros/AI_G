@@ -59,7 +59,9 @@ class CharacterService {
 
   Future<Character> create(CreateCharacterRequest request) async {
     try {
-      final response = await _dio.post('/characters', data: request.toJson());
+      final json = request.toJson();
+      json.removeWhere((key, value) => value == null);
+      final response = await _dio.post('/characters', data: json);
       final data = response.data['data'] as Map<String, dynamic>;
       return Character.fromJson(data);
     } catch (e) {
@@ -69,9 +71,11 @@ class CharacterService {
 
   Future<Character> update(String id, UpdateCharacterRequest request) async {
     try {
+      final json = request.toJson();
+      json.removeWhere((key, value) => value == null);
       final response = await _dio.put(
         '/characters/$id',
-        data: request.toJson(),
+        data: json,
       );
       final data = response.data['data'] as Map<String, dynamic>;
       return Character.fromJson(data);

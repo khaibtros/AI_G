@@ -41,6 +41,7 @@ class _CharacterCreateScreenState extends ConsumerState<CharacterCreateScreen> {
   String? _selectedGender = 'female';
   Set<String> _selectedCategories = {};
   Set<String> _selectedTraits = {};
+  Set<String> _selectedInterests = {};
   String _communicationStyle = AppConstants.communicationStyles.first;
   String _speakingTone = AppConstants.speakingTones.first;
   bool _isNsfw = false;
@@ -106,14 +107,26 @@ class _CharacterCreateScreenState extends ConsumerState<CharacterCreateScreen> {
     setState(() => _step++);
   }
 
+  String _generateDefaultAvatarUrl(String name) {
+    final encodedName = Uri.encodeComponent(name);
+    const colors = [
+      'a855f7', 'ef4444', '10b981', '3b82f6', 'f97316',
+      'ec4899', '06b6d4', '8b5cf6', 'f59e0b', '14b8a6',
+    ];
+    final color = colors[name.hashCode.abs() % colors.length];
+    return 'https://ui-avatars.com/api/?name=$encodedName&background=$color&color=fff&size=512';
+  }
+
   Future<void> _handleCreate() async {
     setState(() => _isLoading = true);
     try {
+      final name = _nameController.text.trim();
+      final avatarUrl = _avatarUrl ?? _generateDefaultAvatarUrl(name);
       final request = CreateCharacterRequest(
-        name: _nameController.text.trim(),
+        name: name,
         tagline: _taglineController.text.trim(),
         description: _descriptionController.text.trim(),
-        avatarUrl: _avatarUrl,
+        avatarUrl: avatarUrl,
         style: _selectedStyle,
         gender: _selectedGender,
         categories: _selectedCategories.toList(),
@@ -122,7 +135,7 @@ class _CharacterCreateScreenState extends ConsumerState<CharacterCreateScreen> {
         greetingMessage: _greetingController.text.trim(),
         personality: CharacterPersonality(
           traits: _selectedTraits.toList(),
-          interests: [],
+          interests: _selectedInterests.toList(),
           communicationStyle: _communicationStyle,
           speakingTone: _speakingTone,
           backstory: _backstoryController.text.trim(),
@@ -484,6 +497,56 @@ class _CharacterCreateScreenState extends ConsumerState<CharacterCreateScreen> {
                 ),
                 child: Text(
                   trait,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isSelected
+                        ? AppColors.primaryLight
+                        : AppColors.textSecondary,
+                    fontWeight: isSelected
+                        ? FontWeight.w600
+                        : FontWeight.normal,
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+        const SizedBox(height: AppSpacing.xl),
+        _buildLabel('Interests (Select multiple)'),
+        const SizedBox(height: AppSpacing.sm),
+        Wrap(
+          spacing: AppSpacing.sm,
+          runSpacing: AppSpacing.sm,
+          children: AppConstants.interests.map((interest) {
+            final isSelected = _selectedInterests.contains(interest);
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  if (isSelected) {
+                    _selectedInterests.remove(interest);
+                  } else {
+                    _selectedInterests.add(interest);
+                  }
+                });
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.md,
+                  vertical: AppSpacing.sm,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: isSelected
+                      ? AppColors.primaryMuted
+                      : AppColors.surface,
+                  border: Border.all(
+                    color: isSelected
+                        ? AppColors.primary
+                        : AppColors.cardBorder,
+                  ),
+                ),
+                child: Text(
+                  interest,
                   style: TextStyle(
                     fontSize: 12,
                     color: isSelected

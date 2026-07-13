@@ -169,9 +169,14 @@ class CharacterNotifier extends Notifier<CharacterListState> {
         }).toList();
       };
 
+      final updatedFavorites = result.isFavorited
+          ? state.favorites
+          : state.favorites.where((c) => c.id != id).toList();
+
       state = state.copyWith(
         characters: updateFav(state.characters),
         featured: updateFav(state.featured),
+        favorites: updatedFavorites,
         selectedCharacter: state.selectedCharacter?.id == id
             ? state.selectedCharacter!.copyWith(isFavorited: result.isFavorited)
             : state.selectedCharacter,

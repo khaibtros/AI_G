@@ -586,35 +586,65 @@ class _NSFWChip extends StatelessWidget {
 }
 
 // ── Character Detail Sheet ─────────────────────────────────────
-class _CharacterDetailSheet extends ConsumerWidget {
+class _CharacterDetailSheet extends ConsumerStatefulWidget {
   final String characterId;
 
   const _CharacterDetailSheet({required this.characterId});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_CharacterDetailSheet> createState() => _CharacterDetailSheetState();
+}
+
+class _CharacterDetailSheetState extends ConsumerState<_CharacterDetailSheet> {
+  late final Future<CharacterDetail> _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _future = ref.read(adminProvider.notifier).getCharacterDetail(widget.characterId);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       initialChildSize: 0.7,
       maxChildSize: 0.95,
       minChildSize: 0.5,
       expand: false,
       builder: (context, scrollController) {
-        return FutureBuilder<CharacterDetail?>(
-          future: ref.read(adminProvider.notifier).getCharacterDetail(characterId),
+        return FutureBuilder<CharacterDetail>(
+          future: _future,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator(color: AppColors.primary));
             }
 
-            final detail = snapshot.data;
-            if (detail == null) {
+            if (snapshot.hasError) {
               return Center(
-                child: Text(
-                  'Failed to load character details',
-                  style: AppTypography.body.copyWith(color: AppColors.error),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.error_outline, size: 48, color: AppColors.error),
+                      const SizedBox(height: 12),
+                      Text(
+                        'Failed to load character details',
+                        style: AppTypography.body.copyWith(color: AppColors.error),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        snapshot.error.toString(),
+                        style: AppTypography.caption.copyWith(color: AppColors.textMuted),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
               );
             }
+
+            final detail = snapshot.data!;
 
             final char = detail.character;
 

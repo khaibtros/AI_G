@@ -94,40 +94,53 @@ class _CharacterDetailScreenState extends ConsumerState<CharacterDetailScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Avatar/Banner
-            if (character.bannerUrl != null || character.avatarUrl != null)
-              Container(
-                height: 200,
-                color: AppColors.surface,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    if (character.bannerUrl != null)
-                      Image.network(character.bannerUrl!, fit: BoxFit.cover)
-                    else if (character.avatarUrl != null)
-                      Image.network(character.avatarUrl!, fit: BoxFit.cover),
-                    if (character.avatarUrl != null)
-                      Positioned(
-                        bottom: -30,
-                        left: AppSpacing.base,
-                        child: Container(
-                          width: 80,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: AppColors.background,
-                              width: 4,
-                            ),
-                          ),
-                          child: Image.network(
-                            character.avatarUrl!,
-                            fit: BoxFit.cover,
-                          ),
+            Container(
+              height: 200,
+              color: AppColors.surface,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  if (character.bannerUrl != null)
+                    Image.network(character.bannerUrl!, fit: BoxFit.cover)
+                  else if (character.avatarUrl != null)
+                    Image.network(character.avatarUrl!, fit: BoxFit.cover)
+                  else
+                    Center(
+                      child: Text(
+                        character.name.characters
+                            .take(2)
+                            .join()
+                            .toUpperCase(),
+                        style: const TextStyle(
+                          fontSize: 64,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
                         ),
                       ),
-                  ],
-                ),
+                    ),
+                  if (character.avatarUrl != null)
+                    Positioned(
+                      bottom: -30,
+                      left: AppSpacing.base,
+                      child: Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: AppColors.background,
+                            width: 4,
+                          ),
+                        ),
+                        child: Image.network(
+                          character.avatarUrl!,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                ],
               ),
+            ),
 
             SizedBox(
               height: character.avatarUrl != null

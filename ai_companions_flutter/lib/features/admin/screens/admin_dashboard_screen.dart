@@ -1146,21 +1146,34 @@ class _TierBadge extends StatelessWidget {
 }
 
 // ── User Detail Sheet ──────────────────────────────────────────
-class _UserDetailSheet extends ConsumerWidget {
+class _UserDetailSheet extends ConsumerStatefulWidget {
   final String userId;
 
   const _UserDetailSheet({required this.userId});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_UserDetailSheet> createState() => _UserDetailSheetState();
+}
+
+class _UserDetailSheetState extends ConsumerState<_UserDetailSheet> {
+  late final Future<UserDetail> _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _future = ref.read(adminProvider.notifier).getUserDetail(widget.userId);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       initialChildSize: 0.7,
       maxChildSize: 0.95,
       minChildSize: 0.5,
       expand: false,
       builder: (context, scrollController) {
-        return FutureBuilder<UserDetail?>(
-          future: ref.read(adminProvider.notifier).getUserDetail(userId),
+        return FutureBuilder<UserDetail>(
+          future: _future,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -1168,15 +1181,32 @@ class _UserDetailSheet extends ConsumerWidget {
               );
             }
 
-            final userDetail = snapshot.data;
-            if (userDetail == null) {
+            if (snapshot.hasError) {
               return Center(
-                child: Text(
-                  'Failed to load user details',
-                  style: AppTypography.body.copyWith(color: AppColors.error),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.error_outline, size: 48, color: AppColors.error),
+                      const SizedBox(height: 12),
+                      Text(
+                        'Failed to load user details',
+                        style: AppTypography.body.copyWith(color: AppColors.error),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        snapshot.error.toString(),
+                        style: AppTypography.caption.copyWith(color: AppColors.textMuted),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
               );
             }
+
+            final userDetail = snapshot.data!;
 
             final user = userDetail.profile;
 
@@ -1267,7 +1297,7 @@ class _UserDetailSheet extends ConsumerWidget {
                           label: 'Grant Coins',
                           icon: Icons.add_circle,
                           color: AppColors.success,
-                          onTap: () => _showCoinDialog(context, ref, userId, true),
+                          onTap: () => _showCoinDialog(context, ref, widget.userId, true),
                         ),
                       ),
                       SizedBox(width: AppSpacing.sm),
@@ -1276,7 +1306,7 @@ class _UserDetailSheet extends ConsumerWidget {
                           label: 'Deduct Coins',
                           icon: Icons.remove_circle,
                           color: AppColors.warning,
-                          onTap: () => _showCoinDialog(context, ref, userId, false),
+                          onTap: () => _showCoinDialog(context, ref, widget.userId, false),
                         ),
                       ),
                     ],
@@ -1288,7 +1318,7 @@ class _UserDetailSheet extends ConsumerWidget {
                       label: 'Ban User',
                       icon: Icons.block,
                       color: AppColors.error,
-                      onTap: () => _confirmBan(context, ref, userId, user.username ?? 'this user'),
+                      onTap: () => _confirmBan(context, ref, widget.userId, user.username ?? 'this user'),
                     ),
                   ),
                   SizedBox(height: AppSpacing.xl),
@@ -2099,35 +2129,65 @@ class _NSFWChip extends StatelessWidget {
 }
 
 // ── Character Detail Sheet ─────────────────────────────────────
-class _CharacterDetailSheet extends ConsumerWidget {
+class _CharacterDetailSheet extends ConsumerStatefulWidget {
   final String characterId;
 
   const _CharacterDetailSheet({required this.characterId});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_CharacterDetailSheet> createState() => _CharacterDetailSheetState();
+}
+
+class _CharacterDetailSheetState extends ConsumerState<_CharacterDetailSheet> {
+  late final Future<CharacterDetail> _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _future = ref.read(adminProvider.notifier).getCharacterDetail(widget.characterId);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       initialChildSize: 0.7,
       maxChildSize: 0.95,
       minChildSize: 0.5,
       expand: false,
       builder: (context, scrollController) {
-        return FutureBuilder<CharacterDetail?>(
-          future: ref.read(adminProvider.notifier).getCharacterDetail(characterId),
+        return FutureBuilder<CharacterDetail>(
+          future: _future,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator(color: AppColors.primary));
             }
 
-            final detail = snapshot.data;
-            if (detail == null) {
+            if (snapshot.hasError) {
               return Center(
-                child: Text(
-                  'Failed to load character details',
-                  style: AppTypography.body.copyWith(color: AppColors.error),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.error_outline, size: 48, color: AppColors.error),
+                      const SizedBox(height: 12),
+                      Text(
+                        'Failed to load character details',
+                        style: AppTypography.body.copyWith(color: AppColors.error),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        snapshot.error.toString(),
+                        style: AppTypography.caption.copyWith(color: AppColors.textMuted),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
               );
             }
+
+            final detail = snapshot.data!;
 
             final char = detail.character;
 

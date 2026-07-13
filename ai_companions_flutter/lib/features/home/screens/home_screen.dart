@@ -80,7 +80,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               ],
                             ),
                             GestureDetector(
-                              onTap: () => context.push('/profile'),
+                              onTap: () => context.go('/profile'),
                               child: _buildAvatar(
                                 user?.avatarUrl,
                                 user?.displayName ?? 'U',

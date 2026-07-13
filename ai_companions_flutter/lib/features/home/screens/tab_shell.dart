@@ -21,9 +21,10 @@ class TabShell extends StatelessWidget {
         child: BottomNavigationBar(
           currentIndex: currentIndex,
           onTap: (index) {
-            if (index != currentIndex) {
-              navigationShell.goBranch(index);
-            }
+            navigationShell.goBranch(
+              index,
+              initialLocation: index == navigationShell.currentIndex,
+            );
           },
           backgroundColor: AppColors.tabBarBg,
           selectedItemColor: AppColors.tabActive,

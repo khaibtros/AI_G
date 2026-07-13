@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:audioplayers/audioplayers.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../core/theme/app_spacing.dart';
@@ -1059,6 +1060,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   bool _isRecording = false;
   String? _playingId;
   String? _generatingVoiceId;
+  AudioPlayer? _audioPlayer;
 
   bool _showGiftPicker = false;
   Message? _actionMessage;
@@ -1091,6 +1093,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
   @override
   void dispose() {
+    _audioPlayer?.dispose();
     messageController.dispose();
     _scrollController.dispose();
     ref.read(chatProvider.notifier).clearActiveChat();
@@ -1111,7 +1114,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   Future<void> _handleSendGift(GiftDefinition gift) async {
     try {
       final result = await ref.read(chatProvider.notifier).sendGift(gift.id);
-      setState(() => _showGiftPicker = false);
+      if (mounted) {
+        setState(() => _showGiftPicker = false);
+      }
       if (result.newBalance > 0) {
         ref.read(authProvider.notifier).updateBalance(result.newBalance);
       }
@@ -1153,19 +1158,25 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   Future<void> _togglePlayAudio(Message message, String? voiceId) async {
     try {
       if (_playingId == message.id) {
+        await _audioPlayer?.stop();
         setState(() {
           _playingId = null;
         });
         return;
       }
 
-      if (message.audioUrl == null) {
+      await _audioPlayer?.stop();
+
+      String? audioUrl = message.audioUrl;
+
+      if (audioUrl == null) {
         setState(() => _generatingVoiceId = message.id);
         try {
           final result = await VoiceService.instance.textToSpeech(
             message.content,
             voice: voiceId ?? 'nova',
           );
+          audioUrl = result.audioUrl;
           if (result.newBalance != null) {
             ref.read(authProvider.notifier).updateBalance(result.newBalance!);
           }
@@ -1174,11 +1185,24 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         }
       }
 
+      if (audioUrl == null) return;
+
+      final player = AudioPlayer();
+      _audioPlayer = player;
+
+      player.onPlayerComplete.listen((_) {
+        if (mounted) {
+          setState(() => _playingId = null);
+        }
+      });
+
+      await player.play(UrlSource(audioUrl));
+
       setState(() => _playingId = message.id);
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Audio playback requires native setup')),
+          SnackBar(content: Text('Audio playback error: $e')),
         );
         setState(() {
           _playingId = null;

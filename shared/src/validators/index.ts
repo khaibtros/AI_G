@@ -22,14 +22,19 @@ export const refreshTokenSchema = z.object({
 });
 
 // ---- Character Validators ----
+// Helper: accept string or undefined (omit null - Flutter strips nulls before sending)
+const optionalString = z.string().url().optional();
+const optionalShortString = z.string().optional();
+const optionalBoolean = z.boolean().optional();
+
 export const createCharacterSchema = z.object({
   name: z.string().min(1, 'Name is required').max(50),
-  tagline: z.string().max(100).optional(),
-  description: z.string().max(2000).optional(),
-  avatar_url: z.string().url().optional(),
-  banner_url: z.string().url().optional(),
-  style: z.enum(['anime', 'realistic', 'cartoon', '3d', 'pixel']).default('anime'),
-  gender: z.enum(['male', 'female', 'non-binary', 'other']).default('female'),
+  tagline: optionalShortString,
+  description: optionalShortString,
+  avatar_url: optionalString,
+  banner_url: optionalString,
+  style: z.enum(['anime', 'realistic', 'cartoon', '3d', 'pixel']).optional().default('anime'),
+  gender: z.enum(['male', 'female', 'non-binary', 'other']).optional().default('female'),
   appearance: z.object({
     hair_color: z.string().optional(),
     eye_color: z.string().optional(),
@@ -51,8 +56,8 @@ export const createCharacterSchema = z.object({
   system_prompt: z.string().max(5000).optional(),
   greeting_message: z.string().max(500).optional(),
   categories: z.array(z.string()).optional(),
-  is_public: z.boolean().default(true),
-  is_nsfw: z.boolean().default(false),
+  is_public: z.boolean().optional().default(true),
+  is_nsfw: z.boolean().optional().default(false),
 });
 
 export const updateCharacterSchema = createCharacterSchema.partial();
@@ -76,7 +81,7 @@ export const sendMessageSchema = z.object({
 // ---- Profile Validators ----
 export const updateProfileSchema = z.object({
   display_name: z.string().min(1).max(50).optional(),
-  avatar_url: z.string().url().optional().nullable(),
+  avatar_url: z.string().url().optional(),
   bio: z.string().max(500).optional(),
   username: z.string().min(3).max(30).regex(/^[a-zA-Z0-9_]+$/).optional(),
 });

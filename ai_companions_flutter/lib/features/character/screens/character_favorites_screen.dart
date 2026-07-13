@@ -83,6 +83,27 @@ class _CharacterFavoritesScreenState
                                 height: double.infinity,
                               ),
                             Positioned(
+                              top: AppSpacing.sm,
+                              right: AppSpacing.sm,
+                              child: GestureDetector(
+                                onTap: () => ref
+                                    .read(characterProvider.notifier)
+                                    .toggleFavorite(character.id),
+                                child: Container(
+                                  padding: const EdgeInsets.all(6),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.5),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.favorite,
+                                    color: Colors.red,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
                               bottom: 0,
                               left: 0,
                               right: 0,

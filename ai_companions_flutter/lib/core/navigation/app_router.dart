@@ -24,8 +24,7 @@ import '../../features/premium/screens/coin_purchase_screen.dart';
 import '../../features/premium/screens/image_generation_screen.dart';
 
 final goRouterProvider = Provider<GoRouter>((ref) {
-  final authState = ref.watch(authProvider);
-  final isAuthenticated = authState.isAuthenticated;
+  final isAuthenticated = ref.watch(authProvider.select((s) => s.isAuthenticated));
 
   return GoRouter(
     initialLocation: isAuthenticated ? '/home' : '/login',
@@ -40,12 +39,13 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       if (isAuthenticated && isAuthRoute) {
         return '/home';
       }
+      final user = ref.read(authProvider).user;
       if (isAuthenticated &&
-          authState.user?.isAdmin == true &&
+          user?.isAdmin == true &&
           location == '/home') {
         return '/admin';
       }
-      if (location.startsWith('/admin') && authState.user?.isAdmin != true) {
+      if (location.startsWith('/admin') && user?.isAdmin != true) {
         return '/home';
       }
       return null;
@@ -108,18 +108,18 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const CharacterCreateScreen(),
       ),
       GoRoute(
-        path: '/character/:characterId',
-        builder: (context, state) => CharacterDetailScreen(
-          characterId: state.pathParameters['characterId']!,
-        ),
-      ),
-      GoRoute(
         path: '/character/favorites',
         builder: (context, state) => const CharacterFavoritesScreen(),
       ),
       GoRoute(
         path: '/character/my-characters',
         builder: (context, state) => const MyCharactersScreen(),
+      ),
+      GoRoute(
+        path: '/character/:characterId',
+        builder: (context, state) => CharacterDetailScreen(
+          characterId: state.pathParameters['characterId']!,
+        ),
       ),
       GoRoute(
         path: '/group/create',

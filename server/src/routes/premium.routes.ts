@@ -47,7 +47,7 @@ router.post('/subscribe', authMiddleware, async (req: AuthRequest, res: Response
       return res.status(400).json({ success: false, error: 'Invalid plan' });
     }
     const sub = await subscriptionService.subscribe(req.user!.id, plan);
-    res.json({ success: true, data: sub });
+    res.json({ success: true, data: { subscription: sub } });
   } catch (err) { next(err); }
 });
 

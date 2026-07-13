@@ -293,27 +293,20 @@ class AdminNotifier extends Notifier<AdminState> {
     state = state.copyWith(userSort: sort);
   }
 
-  Future<UserDetail?> getUserDetail(String userId) async {
-    state = state.copyWith(isLoadingDetail: true);
-    try {
-      final response = await _dio.get('/admin/users/$userId');
-      final data = response.data['data'];
-      state = state.copyWith(isLoadingDetail: false);
-      return UserDetail(
-        profile: Profile.fromJson(data),
-        conversationCount: data['conversationCount'] ?? 0,
-        favoriteCount: data['favoriteCount'] ?? 0,
-        recentTransactions: List<Map<String, dynamic>>.from(
-          (data['recentTransactions'] ?? []).map((e) => Map<String, dynamic>.from(e)),
-        ),
-        subscriptions: List<Map<String, dynamic>>.from(
-          (data['subscriptions'] ?? []).map((e) => Map<String, dynamic>.from(e)),
-        ),
-      );
-    } catch (e) {
-      state = state.copyWith(isLoadingDetail: false);
-      return null;
-    }
+  Future<UserDetail> getUserDetail(String userId) async {
+    final response = await _dio.get('/admin/users/$userId');
+    final data = response.data['data'];
+    return UserDetail(
+      profile: Profile.fromJson(data),
+      conversationCount: data['conversationCount'] ?? 0,
+      favoriteCount: data['favoriteCount'] ?? 0,
+      recentTransactions: List<Map<String, dynamic>>.from(
+        (data['recentTransactions'] ?? []).map((e) => Map<String, dynamic>.from(e)),
+      ),
+      subscriptions: List<Map<String, dynamic>>.from(
+        (data['subscriptions'] ?? []).map((e) => Map<String, dynamic>.from(e)),
+      ),
+    );
   }
 
   Future<bool> updateUserBalance(String userId, int coins) async {
@@ -405,23 +398,16 @@ class AdminNotifier extends Notifier<AdminState> {
     state = state.copyWith(characterSort: sort);
   }
 
-  Future<CharacterDetail?> getCharacterDetail(String characterId) async {
-    state = state.copyWith(isLoadingDetail: true);
-    try {
-      final response = await _dio.get('/admin/characters/$characterId');
-      final data = response.data['data'];
-      state = state.copyWith(isLoadingDetail: false);
-      return CharacterDetail(
-        character: Character.fromJson(data),
-        conversationCount: data['conversationCount'] ?? 0,
-        creator: data['creator'] != null
-            ? Map<String, dynamic>.from(data['creator'])
-            : null,
-      );
-    } catch (e) {
-      state = state.copyWith(isLoadingDetail: false);
-      return null;
-    }
+  Future<CharacterDetail> getCharacterDetail(String characterId) async {
+    final response = await _dio.get('/admin/characters/$characterId');
+    final data = response.data['data'];
+    return CharacterDetail(
+      character: Character.fromJson(data),
+      conversationCount: data['conversationCount'] ?? 0,
+      creator: data['creator'] != null
+          ? Map<String, dynamic>.from(data['creator'])
+          : null,
+    );
   }
 
   Future<bool> toggleCharacterPublic(String characterId) async {

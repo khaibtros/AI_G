@@ -78,9 +78,17 @@ export class CharacterService {
   }
 
   async create(data: CreateCharacterRequest, creatorId: string): Promise<Character> {
+    // Strip null/undefined values so DB defaults are applied for optional fields
+    const cleanData: Record<string, any> = { creator_id: creatorId };
+    for (const [key, value] of Object.entries(data)) {
+      if (value !== null && value !== undefined) {
+        cleanData[key] = value;
+      }
+    }
+
     const { data: character, error } = await supabaseAdmin
       .from('characters')
-      .insert({ ...data, creator_id: creatorId })
+      .insert(cleanData)
       .select()
       .single();
 

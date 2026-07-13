@@ -5,6 +5,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_border_radius.dart';
+import '../../auth/providers/auth_provider.dart';
 import '../providers/admin_provider.dart';
 
 class AdminDashboardScreen extends ConsumerStatefulWidget {
@@ -22,6 +23,32 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
     Future.microtask(() => ref.read(adminProvider.notifier).fetchStats());
   }
 
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.surface,
+        title: const Text('Sign Out'),
+        content: const Text('Are you sure you want to sign out?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.of(ctx).pop();
+              await ref.read(authProvider.notifier).logout();
+              if (context.mounted) context.go('/login');
+            },
+            style: TextButton.styleFrom(foregroundColor: AppColors.error),
+            child: const Text('Sign Out'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(adminProvider);
@@ -34,8 +61,14 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
+          onPressed: () => context.go('/login'),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout, color: AppColors.error),
+            onPressed: () => _showLogoutDialog(context),
+          ),
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: () => ref.read(adminProvider.notifier).fetchStats(),

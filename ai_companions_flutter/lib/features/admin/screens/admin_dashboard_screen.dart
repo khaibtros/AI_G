@@ -76,10 +76,7 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
         ),
         backgroundColor: AppColors.background,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/home'),
-        ),
+
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh, color: AppColors.textSecondary),

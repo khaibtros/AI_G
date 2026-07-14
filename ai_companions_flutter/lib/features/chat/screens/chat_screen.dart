@@ -166,261 +166,269 @@ class _GiftPickerModalState extends ConsumerState<GiftPickerModal> {
             builder: (context, scrollController) {
               return SelectionContainer.disabled(
                 child: Container(
-                decoration: const BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(24),
-                    topRight: Radius.circular(24),
+                  decoration: const BoxDecoration(
+                    color: AppColors.surface,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24),
+                      topRight: Radius.circular(24),
+                    ),
                   ),
-                ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: AppSpacing.sm),
-                      child: Container(
-                        width: 40,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          color: AppColors.textMuted,
-                          borderRadius: BorderRadius.circular(2),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: AppSpacing.sm),
+                        child: Container(
+                          width: 40,
+                          height: 4,
+                          decoration: BoxDecoration(
+                            color: AppColors.textMuted,
+                            borderRadius: BorderRadius.circular(2),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: AppSpacing.md),
-                    Text('Send a Gift', style: AppTypography.h4.copyWith(decoration: TextDecoration.none)),
-                    const SizedBox(height: 4),
-                    Text(
-                      'Show your appreciation with a virtual gift',
-                      style: AppTypography.bodySmall.copyWith(
-                        color: AppColors.textSecondary,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.base,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppColors.accentGold.withOpacity(0.1),
-                        borderRadius: AppBorderRadius.lg,
-                        border: Border.all(
-                          color: AppColors.accentGold.withOpacity(0.2),
+                      const SizedBox(height: AppSpacing.md),
+                      Text(
+                        'Send a Gift',
+                        style: AppTypography.h4.copyWith(
+                          decoration: TextDecoration.none,
                         ),
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.bolt,
-                            size: 14,
-                            color: AppColors.accentGold,
-                          ),
-                          const SizedBox(width: 6),
-                          Text(
-                            '${widget.balance} Coins',
-                            style: const TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.accentGold,
-                              decoration: TextDecoration.none,
-                            ),
-                          ),
-                        ],
+                      const SizedBox(height: 4),
+                      Text(
+                        'Show your appreciation with a virtual gift',
+                        style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.textSecondary,
+                          decoration: TextDecoration.none,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    Expanded(
-                      child: GridView.builder(
-                        controller: scrollController,
+                      const SizedBox(height: AppSpacing.sm),
+                      Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: AppSpacing.base,
+                          vertical: 6,
                         ),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4,
-                          childAspectRatio: 0.78,
-                          crossAxisSpacing: AppSpacing.sm,
-                          mainAxisSpacing: AppSpacing.sm,
-                        ),
-                        itemCount: AppConstants.gifts.length,
-                        itemBuilder: (context, index) {
-                          final gift = AppConstants.gifts[index];
-                          final isSelected = _selectedGift?.id == gift.id;
-                          final rColor = _rarityColor(gift.rarity);
-
-                          return GestureDetector(
-                            onTap: () => setState(() => _selectedGift = gift),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: AppColors.background,
-                                borderRadius: AppBorderRadius.lg,
-                                border: Border.all(
-                                  color: isSelected
-                                      ? rColor
-                                      : AppColors.divider,
-                                  width: isSelected ? 2 : 1,
-                                ),
-                              ),
-                              padding: const EdgeInsets.all(AppSpacing.sm),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 48,
-                                    height: 48,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: AppColors.primary.withOpacity(0.1),
-                                      border: Border.all(color: rColor),
-                                    ),
-                                    child: Icon(
-                                      _giftIcon(gift.icon),
-                                      size: 28,
-                                      color: rColor,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 6),
-                                  Text(
-                                    gift.name,
-                                    style: const TextStyle(
-                                      fontSize: 10,
-                                      color: AppColors.textPrimary,
-                                      fontWeight: FontWeight.w600,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const Icon(
-                                        Icons.bolt,
-                                        size: 12,
-                                        color: AppColors.accentGold,
-                                      ),
-                                      Text(
-                                        '${gift.cost}',
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          color: AppColors.accentGold,
-                                          fontWeight: FontWeight.w700,
-                                          decoration: TextDecoration.none,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    gift.rarity.toUpperCase(),
-                                    style: TextStyle(
-                                      fontSize: 8,
-                                      fontWeight: FontWeight.w800,
-                                      color: rColor,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    if (_selectedGift != null)
-                      Container(
-                        padding: const EdgeInsets.all(AppSpacing.base),
-                        decoration: const BoxDecoration(
-                          border: Border(
-                            top: BorderSide(color: AppColors.divider),
+                        decoration: BoxDecoration(
+                          color: AppColors.accentGold.withOpacity(0.1),
+                          borderRadius: AppBorderRadius.lg,
+                          border: Border.all(
+                            color: AppColors.accentGold.withOpacity(0.2),
                           ),
                         ),
                         child: Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(
-                              _giftIcon(_selectedGift!.icon),
-                              size: 24,
-                              color: _rarityColor(_selectedGift!.rarity),
+                            const Icon(
+                              Icons.bolt,
+                              size: 14,
+                              color: AppColors.accentGold,
                             ),
-                            const SizedBox(width: AppSpacing.sm),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                   Text(
-                                     _selectedGift!.name,
-                                     style: const TextStyle(
-                                       fontSize: 16,
-                                       fontWeight: FontWeight.w600,
-                                       color: AppColors.textPrimary,
-                                       decoration: TextDecoration.none,
-                                     ),
-                                   ),
-                                   Text(
-                                     '+${_selectedGift!.affinity} affinity',
-                                     style: const TextStyle(
-                                       fontSize: 12,
-                                       color: AppColors.accentPink,
-                                       decoration: TextDecoration.none,
-                                     ),
-                                   ),
-                                ],
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                widget.onSend(_selectedGift!);
-                                setState(() => _selectedGift = null);
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: AppSpacing.base,
-                                  vertical: AppSpacing.sm,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: canAfford
-                                      ? AppColors.primary
-                                      : AppColors.textDisabled,
-                                  borderRadius: AppBorderRadius.xl,
-                                ),
-                                child: widget.isSending
-                                    ? const SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: CircularProgressIndicator(
-                                          strokeWidth: 2,
-                                          color: Colors.white,
-                                        ),
-                                      )
-                                    : Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          const Icon(
-                                            Icons.bolt,
-                                            size: 16,
-                                            color: Colors.white,
-                                          ),
-                                          Text(
-                                            canAfford
-                                                ? '${_selectedGift!.cost} Send'
-                                                : 'Insufficient',
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 13,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                            const SizedBox(width: 6),
+                            Text(
+                              '${widget.balance} Coins',
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.accentGold,
+                                decoration: TextDecoration.none,
                               ),
                             ),
                           ],
                         ),
                       ),
-                  ],
-                ),
+                      const SizedBox(height: AppSpacing.sm),
+                      Expanded(
+                        child: GridView.builder(
+                          controller: scrollController,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppSpacing.base,
+                          ),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 4,
+                                childAspectRatio: 0.78,
+                                crossAxisSpacing: AppSpacing.sm,
+                                mainAxisSpacing: AppSpacing.sm,
+                              ),
+                          itemCount: AppConstants.gifts.length,
+                          itemBuilder: (context, index) {
+                            final gift = AppConstants.gifts[index];
+                            final isSelected = _selectedGift?.id == gift.id;
+                            final rColor = _rarityColor(gift.rarity);
+
+                            return GestureDetector(
+                              onTap: () => setState(() => _selectedGift = gift),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: AppColors.background,
+                                  borderRadius: AppBorderRadius.lg,
+                                  border: Border.all(
+                                    color: isSelected
+                                        ? rColor
+                                        : AppColors.divider,
+                                    width: isSelected ? 2 : 1,
+                                  ),
+                                ),
+                                padding: const EdgeInsets.all(AppSpacing.sm),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 48,
+                                      height: 48,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColors.primary.withOpacity(
+                                          0.1,
+                                        ),
+                                        border: Border.all(color: rColor),
+                                      ),
+                                      child: Icon(
+                                        _giftIcon(gift.icon),
+                                        size: 28,
+                                        color: rColor,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      gift.name,
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                        color: AppColors.textPrimary,
+                                        fontWeight: FontWeight.w600,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const Icon(
+                                          Icons.bolt,
+                                          size: 12,
+                                          color: AppColors.accentGold,
+                                        ),
+                                        Text(
+                                          '${gift.cost}',
+                                          style: const TextStyle(
+                                            fontSize: 10,
+                                            color: AppColors.accentGold,
+                                            fontWeight: FontWeight.w700,
+                                            decoration: TextDecoration.none,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      gift.rarity.toUpperCase(),
+                                      style: TextStyle(
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.w800,
+                                        color: rColor,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      if (_selectedGift != null)
+                        Container(
+                          padding: const EdgeInsets.all(AppSpacing.base),
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              top: BorderSide(color: AppColors.divider),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                _giftIcon(_selectedGift!.icon),
+                                size: 24,
+                                color: _rarityColor(_selectedGift!.rarity),
+                              ),
+                              const SizedBox(width: AppSpacing.sm),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      _selectedGift!.name,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.textPrimary,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                    Text(
+                                      '+${_selectedGift!.affinity} affinity',
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color: AppColors.accentPink,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  widget.onSend(_selectedGift!);
+                                  setState(() => _selectedGift = null);
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: AppSpacing.base,
+                                    vertical: AppSpacing.sm,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: canAfford
+                                        ? AppColors.primary
+                                        : AppColors.textDisabled,
+                                    borderRadius: AppBorderRadius.xl,
+                                  ),
+                                  child: widget.isSending
+                                      ? const SizedBox(
+                                          width: 20,
+                                          height: 20,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      : Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            const Icon(
+                                              Icons.bolt,
+                                              size: 16,
+                                              color: Colors.white,
+                                            ),
+                                            Text(
+                                              canAfford
+                                                  ? '${_selectedGift!.cost} Send'
+                                                  : 'Insufficient',
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               );
             },
@@ -1066,19 +1074,48 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   Message? _actionMessage;
   bool _showActions = false;
 
+  bool _isNearBottom = true;
+  int _newMessageCount = 0;
+  int _prevMessageCount = 0;
+  String _prevStreamingContent = '';
+
   @override
   void initState() {
     super.initState();
     messageController = TextEditingController();
+    _initScrollListener();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       _loadData();
     });
   }
 
+  void _initScrollListener() {
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (!_scrollController.hasClients) return;
+    final position = _scrollController.position;
+    final maxExtent = position.maxScrollExtent;
+    if (maxExtent == 0) {
+      _isNearBottom = true;
+      return;
+    }
+    final distanceFromBottom = maxExtent - position.pixels;
+    final wasNearBottom = _isNearBottom;
+    _isNearBottom = distanceFromBottom < 150;
+
+    if (_isNearBottom && !wasNearBottom) {
+      setState(() => _newMessageCount = 0);
+    }
+  }
+
   Future<void> _loadData() async {
     try {
-      await ref.read(chatProvider.notifier).loadConversation(widget.conversationId);
+      await ref
+          .read(chatProvider.notifier)
+          .loadConversation(widget.conversationId);
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -1088,16 +1125,41 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     }
     if (mounted) {
       ref.read(authProvider.notifier).loadProfile();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        _scrollToBottom(animate: false);
+      });
     }
   }
 
   @override
   void dispose() {
+    _scrollController.removeListener(_onScroll);
     _audioPlayer?.dispose();
     messageController.dispose();
     _scrollController.dispose();
     ref.read(chatProvider.notifier).clearActiveChat();
     super.dispose();
+  }
+
+  void _scrollToBottom({bool animate = true}) {
+    if (!_scrollController.hasClients) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!_scrollController.hasClients) return;
+      final maxExtent = _scrollController.position.maxScrollExtent;
+      if (maxExtent == 0) return;
+      if (animate) {
+        _scrollController.animateTo(
+          maxExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      } else {
+        _scrollController.jumpTo(maxExtent);
+      }
+      _isNearBottom = true;
+      _newMessageCount = 0;
+    });
   }
 
   Future<void> _handleSendText() async {
@@ -1108,6 +1170,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     if (chatState.isSending || chatState.isStreaming) return;
 
     messageController.clear();
+    _isNearBottom = true;
+    _newMessageCount = 0;
     await chatNotifier.sendStreamingMessage(text);
   }
 
@@ -1201,9 +1265,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       setState(() => _playingId = message.id);
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Audio playback error: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Audio playback error: $e')));
         setState(() {
           _playingId = null;
           _generatingVoiceId = null;
@@ -1290,95 +1354,52 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         .firstOrNull
         ?.id;
 
-    if (chatState.isLoading) {
-      return Stack(
-        children: [
-          Scaffold(
-            backgroundColor: AppColors.background,
-            body: SafeArea(
-              child: Column(
-                children: [
-                  _buildHeader(chatState, mainCharacter, isGroup, authState),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => FocusScope.of(context).unfocus(),
-                      child: ListView.builder(
-                        controller: _scrollController,
-                        itemCount: messages.length + 1,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: AppSpacing.md,
-                          horizontal: AppSpacing.sm,
-                        ),
-                        itemBuilder: (context, index) {
-                          if (index == messages.length) {
-                            if (chatState.isStreaming &&
-                                chatState.streamingContent.isNotEmpty) {
-                              return StreamingBubble(
-                                content: chatState.streamingContent,
-                                character: mainCharacter != null
-                                    ? MessageCharacter(
-                                        id: mainCharacter.id,
-                                        name: mainCharacter.name,
-                                        avatarUrl: mainCharacter.avatarUrl,
-                                      )
-                                    : null,
-                              );
-                            }
-                            if ((chatState.isSending &&
-                                    !chatState.isStreaming) ||
-                                chatState.isSendingGift) {
-                              return const TypingIndicator();
-                            }
-                            return const SizedBox.shrink();
-                          }
-                          return MessageItem(
-                            item: messages[index],
-                            index: index,
-                            mainCharacter: mainCharacter != null
-                                ? MessageCharacter(
-                                    id: mainCharacter.id,
-                                    name: mainCharacter.name,
-                                    avatarUrl: mainCharacter.avatarUrl,
-                                  )
-                                : null,
-                            messages: messages,
-                            playingId: _playingId,
-                            generatingVoiceId: _generatingVoiceId,
-                            onLongPress: _handleMessageLongPress,
-                            onTogglePlay: _togglePlayAudio,
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  _buildInputBar(chatState),
-                ],
-              ),
-            ),
-          ),
-          if (_showGiftPicker)
-            GiftPickerModal(
-              onClose: () => setState(() => _showGiftPicker = false),
-              onSend: _handleSendGift,
-              isSending: chatState.isSendingGift,
-              balance: authState.user?.coinBalance ?? 0,
-            ),
-          if (_showActions)
-            MessageActionSheet(
-              visible: _showActions,
-              message: _actionMessage,
-              isLastAI: _actionMessage?.id == lastAIMessageId,
-              onClose: () => setState(() {
-                _showActions = false;
-                _actionMessage = null;
-              }),
-              onCopy: _handleCopyMessage,
-              onDelete: _handleDeleteMessage,
-              onRegenerate: _handleRegenerate,
-            ),
-        ],
-      );
+    final currentMsgCount = messages.length;
+    final currentStreaming = chatState.streamingContent;
+
+    if (currentMsgCount > _prevMessageCount) {
+      final added = currentMsgCount - _prevMessageCount;
+      if (_isNearBottom) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted && _scrollController.hasClients) {
+            _scrollController.animateTo(
+              _scrollController.position.maxScrollExtent,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeOut,
+            );
+          }
+        });
+      } else {
+        _newMessageCount += added;
+      }
     }
+
+    if (currentStreaming.isNotEmpty &&
+        currentStreaming != _prevStreamingContent &&
+        _isNearBottom) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && _scrollController.hasClients) {
+          _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+        }
+      });
+    }
+
+    if (!chatState.isStreaming &&
+        _prevStreamingContent.isNotEmpty &&
+        _isNearBottom) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && _scrollController.hasClients) {
+          _scrollController.animateTo(
+            _scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOut,
+          );
+        }
+      });
+    }
+
+    _prevMessageCount = currentMsgCount;
+    _prevStreamingContent = currentStreaming;
 
     return Stack(
       children: [
@@ -1444,6 +1465,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             ),
           ),
         ),
+        Positioned(
+          bottom: 80,
+          left: 0,
+          right: 0,
+          child: Center(child: _buildJumpToBottomButton()),
+        ),
         if (_showGiftPicker)
           GiftPickerModal(
             onClose: () => setState(() => _showGiftPicker = false),
@@ -1465,6 +1492,86 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             onRegenerate: _handleRegenerate,
           ),
       ],
+    );
+  }
+
+  Widget _buildJumpToBottomButton() {
+    final shouldShow =
+        !_isNearBottom &&
+        (_newMessageCount > 0 || ref.read(chatProvider).isStreaming);
+    return AnimatedSlide(
+      offset: Offset(0, shouldShow ? 0 : 2),
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeOut,
+      child: AnimatedOpacity(
+        opacity: shouldShow ? 1.0 : 0.0,
+        duration: const Duration(milliseconds: 200),
+        child: shouldShow
+            ? GestureDetector(
+                onTap: () => _scrollToBottom(animate: true),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.base,
+                    vertical: AppSpacing.sm,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.surface,
+                    borderRadius: AppBorderRadius.xl,
+                    border: Border.all(
+                      color: AppColors.primary.withOpacity(0.3),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.3),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        Icons.keyboard_arrow_down,
+                        size: 18,
+                        color: AppColors.primary,
+                      ),
+                      if (_newMessageCount > 0) ...[
+                        const SizedBox(width: 4),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            _newMessageCount > 99 ? '99+' : '$_newMessageCount',
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                      const SizedBox(width: 2),
+                      const Text(
+                        'New',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            : const SizedBox.shrink(),
+      ),
     );
   }
 
@@ -1641,19 +1748,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          GestureDetector(
-            onTapDown: (_) => _startRecording(),
-            onTapUp: (_) => _stopRecording(),
-            onTapCancel: () => _stopRecording(),
-            child: Padding(
-              padding: const EdgeInsets.all(4),
-              child: Icon(
-                _isRecording ? Icons.mic : Icons.mic_outlined,
-                size: 24,
-                color: _isRecording ? AppColors.error : AppColors.textMuted,
-              ),
-            ),
-          ),
           GestureDetector(
             onTap: () => setState(() => _showGiftPicker = true),
             child: const Padding(

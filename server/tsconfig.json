@@ -4,8 +4,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "module": "Node16",
-    "moduleResolution": "Node16",
-    "typeRoots": ["./node_modules/@types", "../node_modules/@types"]
+    "moduleResolution": "Node16"
   },
   "include": ["src/**/*"]
 }

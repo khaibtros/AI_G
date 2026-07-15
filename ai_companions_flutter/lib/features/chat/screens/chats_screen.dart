@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_border_radius.dart';
+import '../../../core/config/app_config.dart';
 import '../providers/chat_provider.dart';
 
 class ChatsScreen extends ConsumerStatefulWidget {
@@ -273,11 +274,12 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
   }
 
   Widget _buildAvatar(String? url, String fallback) {
-    if (url != null) {
+    final resolvedUrl = AppConfig.resolveImageUrl(url);
+    if (resolvedUrl != null) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(26),
         child: CachedNetworkImage(
-          imageUrl: url,
+          imageUrl: resolvedUrl,
           width: 52,
           height: 52,
           fit: BoxFit.cover,

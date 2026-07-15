@@ -7,6 +7,7 @@ import '../../../core/theme/app_typography.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_border_radius.dart';
 import '../../../core/constants/app_constants.dart';
+import '../../../core/config/app_config.dart';
 import '../../../shared/models/index.dart';
 import '../../character/providers/character_provider.dart';
 import '../../shared/widgets/error_display_widget.dart';
@@ -311,6 +312,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
   }) {
     return GestureDetector(
       onTap: onTap,
+      behavior: HitTestBehavior.opaque,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
@@ -425,6 +427,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                 (opt) => GestureDetector(
                   onTap: () =>
                       _handleDropdownSelect(_activeDropdown!, opt.value),
+                  behavior: HitTestBehavior.opaque,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: AppSpacing.md,
@@ -487,7 +490,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
               Positioned.fill(
                 child: character.avatarUrl != null
                     ? CachedNetworkImage(
-                        imageUrl: character.avatarUrl!,
+                        imageUrl: AppConfig.resolveImageUrl(character.avatarUrl!)!,
                         fit: BoxFit.cover,
                         errorWidget: (_, __, ___) =>
                             Container(color: AppColors.surface),

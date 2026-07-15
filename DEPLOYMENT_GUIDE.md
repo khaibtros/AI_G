@@ -90,7 +90,7 @@ Open `http://localhost:8000` in your browser.
 
 The server depends on the `shared/` package (monorepo). Render will install and build from the project root, so the build commands handle both packages.
 
-No changes are needed to the code. Verify `server/package.json` has:
+A `render.yaml` is included in the repo root with the correct build/start configuration. Verify `server/package.json` has:
 
 ```json
 {
@@ -115,7 +115,7 @@ No changes are needed to the code. Verify `server/package.json` has:
 | **Branch** | `main` (or your default branch) |
 | **Runtime** | Node |
 | **Build Command** | `npm install && npm run build` |
-| **Start Command** | `node dist/index.js` |
+| **Start Command** | `node server/dist/index.js` |
 | **Instance Type** | Free (or Starter for production) |
 
 > The build command runs from the project root. The `postinstall` script in the root `package.json` automatically builds the `shared/` package after `npm install`. Then `npm run build` compiles both `shared/` and `server/`.
@@ -139,7 +139,7 @@ Click **Create Web Service**. Render will:
 1. Clone your repo
 2. Run `npm install` (triggers `postinstall` -> builds `shared/`)
 3. Run `npm run build` (builds `server/`)
-4. Run `node dist/index.js`
+4. Run `node server/dist/index.js`
 
 ### Step 5: Verify
 
@@ -229,30 +229,26 @@ vercel --prod
 
 #### Step 4: Configure `vercel.json` (Optional but Recommended)
 
-Create `ai_companions_flutter/build/web/vercel.json` to handle SPA routing:
+A `vercel.json` is already included at `ai_companions_flutter/vercel.json` with SPA rewrites and cache headers. If you need to modify it, the current configuration is:
 
 ```json
 {
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    }
   ]
 }
 ```
 
-Or place a `vercel.json` in the Flutter project root (`ai_companions_flutter/vercel.json`):
-
-```json
-{
-  "buildCommand": "flutter build web --release",
-  "outputDirectory": "build/web",
-  "framework": null,
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
-}
-```
-
-> If using the root-level `vercel.json` with a build command, you need to ensure Flutter is available in Vercel's build environment. For most cases, building locally and deploying the output is simpler.
+> If deploying the `build/web/` output directly (not from repo), place this `vercel.json` inside `build/web/` before deploying.
 
 #### Step 5: Verify
 
@@ -320,14 +316,7 @@ The chat streaming feature (`chat_service.dart`) uses `dart:io`'s `HttpClient`, 
 
 ### CORS
 
-The Express backend uses `app.use(cors())` with default settings, which allows **all origins**. This is fine for development and testing. For production, consider restricting CORS to your Vercel domain:
-
-```typescript
-app.use(cors({
-  origin: ['https://ai-companions.vercel.app'],
-  credentials: true,
-}));
-```
+The Express backend uses `app.use(cors())` with default settings, which allows **all origins**. This is fine for development and testing. For production, you may want to restrict CORS to your Vercel domain in `server/src/index.ts`.
 
 ### Free Tier Limitations
 
@@ -353,7 +342,6 @@ app.use(cors({
 ### App loads but API calls fail
 
 - Open browser DevTools (F12) and check the Network tab.
-- If you see CORS errors, the backend is blocking the request. Check the `cors()` configuration.
 - If requests go to `localhost`, your `.env` was not updated before the build.
 - Remember: `.env` values are baked in at build time. Rebuild after changing them.
 
@@ -390,8 +378,8 @@ flutter run -d chrome
 # 3. Deploy backend to Render
 #    - Create Web Service on render.com
 #    - Build: npm install && npm run build
-#    - Start: node dist/index.js
-#    - Set env vars in dashboard
+#    - Start: node server/dist/index.js
+#    - Set env vars in dashboard (SUPABASE_URL, OPENAI_API_KEY, etc.)
 
 # 4. Deploy frontend to Vercel
 #    - Update .env with Render backend URL

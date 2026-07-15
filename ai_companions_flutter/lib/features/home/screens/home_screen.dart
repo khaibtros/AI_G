@@ -9,6 +9,7 @@ import '../../chat/providers/chat_provider.dart';
 import '../../auth/providers/auth_provider.dart';
 import '../../../shared/widgets/loading_widget.dart';
 import '../../../shared/widgets/empty_state_widget.dart';
+import '../../../core/config/app_config.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -341,7 +342,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     children: [
                                       if (character.avatarUrl != null)
                                         Image.network(
-                                          character.avatarUrl!,
+                                          AppConfig.resolveImageUrl(character.avatarUrl!)!,
                                           fit: BoxFit.cover,
                                           alignment: Alignment.topCenter,
                                           width: double.infinity,
@@ -456,11 +457,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Widget _buildAvatar(String? url, String fallback) {
-    if (url != null) {
+    final resolvedUrl = AppConfig.resolveImageUrl(url);
+    if (resolvedUrl != null) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(22),
         child: Image.network(
-          url,
+          resolvedUrl,
           width: 44,
           height: 44,
           fit: BoxFit.cover,
@@ -495,11 +497,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Widget _buildRecentAvatar(String? url, String fallback) {
-    if (url != null) {
+    final resolvedUrl = AppConfig.resolveImageUrl(url);
+    if (resolvedUrl != null) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(32),
         child: Image.network(
-          url,
+          resolvedUrl,
           width: 64,
           height: 64,
           fit: BoxFit.cover,

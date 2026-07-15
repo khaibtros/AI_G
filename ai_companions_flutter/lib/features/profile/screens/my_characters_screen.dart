@@ -5,6 +5,7 @@ import 'package:ai_companions_flutter/core/theme/app_colors.dart';
 import 'package:ai_companions_flutter/core/theme/app_typography.dart';
 import 'package:ai_companions_flutter/core/theme/app_spacing.dart';
 import 'package:ai_companions_flutter/core/theme/app_border_radius.dart';
+import 'package:ai_companions_flutter/core/config/app_config.dart';
 import 'package:ai_companions_flutter/features/character/providers/character_provider.dart';
 import 'package:ai_companions_flutter/shared/models/character.dart';
 
@@ -145,7 +146,7 @@ class _MyCharactersScreenState extends ConsumerState<MyCharactersScreen> {
             children: [
               if (character.avatarUrl != null)
                 Image.network(
-                  character.avatarUrl!,
+                  AppConfig.resolveImageUrl(character.avatarUrl!)!,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) => const Icon(
                     Icons.person,

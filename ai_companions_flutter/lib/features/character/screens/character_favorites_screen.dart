@@ -9,6 +9,7 @@ import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_border_radius.dart';
 import '../../../shared/widgets/loading_widget.dart';
 import '../../../shared/widgets/empty_state_widget.dart';
+import '../../../core/config/app_config.dart';
 import '../../character/providers/character_provider.dart';
 
 class CharacterFavoritesScreen extends ConsumerStatefulWidget {
@@ -77,7 +78,7 @@ class _CharacterFavoritesScreenState
                           children: [
                             if (character.avatarUrl != null)
                               Image.network(
-                                character.avatarUrl!,
+                                AppConfig.resolveImageUrl(character.avatarUrl!)!,
                                 fit: BoxFit.cover,
                                 width: double.infinity,
                                 height: double.infinity,

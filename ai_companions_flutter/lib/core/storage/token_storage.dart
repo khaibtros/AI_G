@@ -2,15 +2,15 @@
 // Mobile: flutter_secure_storage, Web: SharedPreferences fallback
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'token_storage_native.dart'
+    if (dart.library.js) 'token_storage_web.dart';
 
 class TokenStorage {
   TokenStorage._();
 
   static final TokenStorage instance = TokenStorage._();
-
-  final _secureStorage = const FlutterSecureStorage();
 
   // Keys
   static const String _accessTokenKey = 'access_token';
@@ -23,7 +23,7 @@ class TokenStorage {
         final prefs = await SharedPreferences.getInstance();
         return prefs.getString(key);
       } else {
-        return await _secureStorage.read(key: key);
+        return await secureRead(key);
       }
     } catch (e) {
       return null;
@@ -37,7 +37,7 @@ class TokenStorage {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString(key, value);
       } else {
-        await _secureStorage.write(key: key, value: value);
+        await secureWrite(key, value);
       }
     } catch (e) {
       // Silently fail
@@ -51,7 +51,7 @@ class TokenStorage {
         final prefs = await SharedPreferences.getInstance();
         await prefs.remove(key);
       } else {
-        await _secureStorage.delete(key: key);
+        await secureDelete(key);
       }
     } catch (e) {
       // Silently fail

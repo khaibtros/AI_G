@@ -101,7 +101,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 TextFormField(
                   controller: displayNameController,
                   decoration: InputDecoration(
-                    hintText: 'Display Name (optional)',
+                    hintText: 'Display Name',
                     prefixIcon: const Icon(Icons.badge),
                     filled: true,
                     fillColor: AppColors.inputBg,

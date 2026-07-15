@@ -1,28 +1,40 @@
 // Upload Service - Supabase Image Upload
 
-import 'dart:io';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'dart:typed_data';
+import 'package:dio/dio.dart';
+import '../config/app_config.dart';
+import '../network/dio_client.dart';
+import '../storage/token_storage.dart';
 
 class UploadService {
   UploadService._();
 
   static final instance = UploadService._();
 
-  Future<String> uploadImage(File file, {String prefix = 'avatars'}) async {
+  Dio get _dio => DioClient.instance.dio;
+
+  Future<String> uploadImage(Uint8List bytes, {String prefix = 'avatars', String fileName = 'image'}) async {
     try {
-      final fileName = '${DateTime.now().millisecondsSinceEpoch}_${file.path.split('/').last}';
-      final filePath = '$prefix/$fileName';
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      final filePath = '$prefix/${timestamp}_$fileName';
 
-      final bytes = await file.readAsBytes();
-      await Supabase.instance.client.storage
-          .from('images')
-          .uploadBinary(filePath, bytes, fileOptions: const FileOptions(upsert: false));
+      final token = await TokenStorage.instance.getAccessToken();
+      final url = '${AppConfig.supabaseUrl}/storage/v1/object/images/$filePath';
 
-      final publicUrl = Supabase.instance.client.storage
-          .from('images')
-          .getPublicUrl(filePath);
+      await _dio.put(
+        url,
+        data: Stream.fromIterable([bytes]),
+        options: Options(
+          headers: {
+            'Content-Type': 'application/octet-stream',
+            'Authorization': 'Bearer $token',
+            'apikey': AppConfig.supabaseAnonKey,
+          },
+          contentType: 'application/octet-stream',
+        ),
+      );
 
-      return publicUrl;
+      return '${AppConfig.supabaseUrl}/storage/v1/object/public/images/$filePath';
     } catch (e) {
       rethrow;
     }

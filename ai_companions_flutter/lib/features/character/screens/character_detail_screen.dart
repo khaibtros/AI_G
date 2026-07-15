@@ -9,6 +9,7 @@ import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_border_radius.dart';
 import '../../../shared/widgets/loading_widget.dart';
 import '../../../shared/widgets/empty_state_widget.dart';
+import '../../../core/config/app_config.dart';
 import '../providers/character_provider.dart';
 import '../../chat/providers/chat_provider.dart';
 
@@ -101,9 +102,9 @@ class _CharacterDetailScreenState extends ConsumerState<CharacterDetailScreen> {
                 fit: StackFit.expand,
                 children: [
                   if (character.bannerUrl != null)
-                    Image.network(character.bannerUrl!, fit: BoxFit.cover)
+                    Image.network(AppConfig.resolveImageUrl(character.bannerUrl!)!, fit: BoxFit.cover)
                   else if (character.avatarUrl != null)
-                    Image.network(character.avatarUrl!, fit: BoxFit.cover)
+                    Image.network(AppConfig.resolveImageUrl(character.avatarUrl!)!, fit: BoxFit.cover)
                   else
                     Center(
                       child: Text(
@@ -133,7 +134,7 @@ class _CharacterDetailScreenState extends ConsumerState<CharacterDetailScreen> {
                           ),
                         ),
                         child: Image.network(
-                          character.avatarUrl!,
+                          AppConfig.resolveImageUrl(character.avatarUrl!)!,
                           fit: BoxFit.cover,
                         ),
                       ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
@@ -72,9 +71,11 @@ class _CharacterCreateScreenState extends ConsumerState<CharacterCreateScreen> {
     if (picked == null) return;
     setState(() => _isLoading = true);
     try {
+      final bytes = await picked.readAsBytes();
       final url = await UploadService.instance.uploadImage(
-        File(picked.path),
+        bytes,
         prefix: 'avatars',
+        fileName: picked.name,
       );
       setState(() => _avatarUrl = url);
     } catch (e) {

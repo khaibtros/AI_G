@@ -2,10 +2,8 @@
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:dio/dio.dart';
 import '../../core/network/dio_client.dart';
-import '../../core/storage/token_storage.dart';
 import '../../core/config/app_config.dart';
 import '../../shared/models/index.dart';
 
@@ -82,24 +80,24 @@ class ChatService {
     required void Function(String) onError,
   }) async {
     try {
-      final token = await TokenStorage.instance.getAccessToken();
       final url = '${AppConfig.apiBaseUrl}/chat/conversations/$conversationId/stream';
 
-      final client = HttpClient();
-      final request = await client.postUrl(Uri.parse(url));
-      request.headers.set('Content-Type', 'application/json');
-      request.headers.set('Authorization', 'Bearer $token');
-      request.write('{"content":"$content"}');
+      final response = await _dio.post<ResponseBody>(
+        url,
+        data: {'content': content},
+        options: Options(
+          responseType: ResponseType.stream,
+          headers: {'Accept': 'text/event-stream'},
+        ),
+      );
 
-      final response = await request.close();
       final completer = Completer<void>();
-
       String buffer = '';
       String currentEvent = '';
 
-      response.transform(utf8.decoder).listen(
+      response.data!.stream.listen(
         (data) {
-          buffer += data;
+          buffer += utf8.decode(data);
           final lines = buffer.split('\n');
           buffer = lines.last;
 

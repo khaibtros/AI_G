@@ -10,6 +10,7 @@ import '../providers/admin_provider.dart';
 import '../../../shared/models/profile.dart';
 import '../../../shared/models/character.dart';
 import '../../../shared/models/enums.dart';
+import '../../../core/config/app_config.dart';
 
 class AdminDashboardScreen extends ConsumerStatefulWidget {
   const AdminDashboardScreen({super.key});
@@ -704,8 +705,10 @@ class _ActivityTile extends StatelessWidget {
       leading: CircleAvatar(
         radius: 18,
         backgroundColor: AppColors.surfaceLight,
-        backgroundImage: avatar != null ? NetworkImage(avatar!) : null,
-        child: avatar == null
+        backgroundImage: avatar != null && avatar!.isNotEmpty
+            ? NetworkImage(AppConfig.resolveImageUrl(avatar!) ?? '')
+            : null,
+        child: (avatar == null || avatar!.isEmpty)
             ? const Icon(Icons.person, size: 18, color: AppColors.textMuted)
             : null,
       ),
@@ -1069,7 +1072,7 @@ class _UserCard extends StatelessWidget {
             CircleAvatar(
               radius: 22,
               backgroundColor: AppColors.surfaceLight,
-              backgroundImage: user.avatarUrl != null ? NetworkImage(user.avatarUrl!) : null,
+              backgroundImage: user.avatarUrl != null ? NetworkImage(AppConfig.resolveImageUrl(user.avatarUrl!)!) : null,
               child: user.avatarUrl == null
                   ? const Icon(Icons.person, color: AppColors.textMuted)
                   : null,
@@ -1236,10 +1239,10 @@ class _UserDetailSheetState extends ConsumerState<_UserDetailSheet> {
                         CircleAvatar(
                           radius: 36,
                           backgroundColor: AppColors.surfaceLight,
-                          backgroundImage: user.avatarUrl != null
-                              ? NetworkImage(user.avatarUrl!)
+                          backgroundImage: user.avatarUrl != null && user.avatarUrl!.isNotEmpty
+                              ? NetworkImage(AppConfig.resolveImageUrl(user.avatarUrl!) ?? '')
                               : null,
-                          child: user.avatarUrl == null
+                          child: (user.avatarUrl == null || user.avatarUrl!.isEmpty)
                               ? const Icon(Icons.person, size: 36, color: AppColors.textMuted)
                               : null,
                         ),
@@ -1605,6 +1608,14 @@ class _AdminCharactersTabState extends ConsumerState<_AdminCharactersTab> {
   bool _showFilters = false;
 
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      ref.read(adminProvider.notifier).fetchCharacters();
+    });
+  }
+
+  @override
   void dispose() {
     _searchController.dispose();
     super.dispose();
@@ -1944,10 +1955,10 @@ class _CharacterCard extends StatelessWidget {
             CircleAvatar(
               radius: 28,
               backgroundColor: AppColors.surfaceLight,
-              backgroundImage: character.avatarUrl != null
-                  ? NetworkImage(character.avatarUrl!)
+              backgroundImage: character.avatarUrl != null && character.avatarUrl!.isNotEmpty
+                  ? NetworkImage(AppConfig.resolveImageUrl(character.avatarUrl!) ?? '')
                   : null,
-              child: character.avatarUrl == null
+              child: (character.avatarUrl == null || character.avatarUrl!.isEmpty)
                   ? const Icon(Icons.person, color: AppColors.textMuted)
                   : null,
             ),
@@ -2217,10 +2228,10 @@ class _CharacterDetailSheetState extends ConsumerState<_CharacterDetailSheet> {
                         CircleAvatar(
                           radius: 40,
                           backgroundColor: AppColors.surfaceLight,
-                          backgroundImage: char.avatarUrl != null
-                              ? NetworkImage(char.avatarUrl!)
+                          backgroundImage: char.avatarUrl != null && char.avatarUrl!.isNotEmpty
+                              ? NetworkImage(AppConfig.resolveImageUrl(char.avatarUrl!) ?? '')
                               : null,
-                          child: char.avatarUrl == null
+                          child: (char.avatarUrl == null || char.avatarUrl!.isEmpty)
                               ? const Icon(Icons.person, size: 40, color: AppColors.textMuted)
                               : null,
                         ),
@@ -2311,7 +2322,7 @@ class _CharacterDetailSheetState extends ConsumerState<_CharacterDetailSheet> {
                           radius: 16,
                           backgroundColor: AppColors.surfaceLight,
                           backgroundImage: detail.creator!['avatar_url'] != null
-                              ? NetworkImage(detail.creator!['avatar_url'])
+                              ? NetworkImage(AppConfig.resolveImageUrl(detail.creator!['avatar_url']) ?? '')
                               : null,
                           child: detail.creator!['avatar_url'] == null
                               ? const Icon(Icons.person, size: 16, color: AppColors.textMuted)
@@ -2547,8 +2558,10 @@ class _SubscriptionCard extends StatelessWidget {
           CircleAvatar(
             radius: 20,
             backgroundColor: AppColors.surfaceLight,
-            backgroundImage: userAvatar != null ? NetworkImage(userAvatar!) : null,
-            child: userAvatar == null
+            backgroundImage: userAvatar != null && userAvatar!.isNotEmpty
+                ? NetworkImage(AppConfig.resolveImageUrl(userAvatar!) ?? '')
+                : null,
+            child: (userAvatar == null || userAvatar!.isEmpty)
                 ? const Icon(Icons.person, color: AppColors.textMuted, size: 20)
                 : null,
           ),

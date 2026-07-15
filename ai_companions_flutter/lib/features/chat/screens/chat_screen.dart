@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +8,7 @@ import '../../../core/theme/app_typography.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_border_radius.dart';
 import '../../../core/constants/app_constants.dart';
+import '../../../core/config/app_config.dart';
 import '../../../core/services/voice_service.dart';
 import '../../../shared/models/index.dart';
 import '../../../features/auth/providers/auth_provider.dart';
@@ -697,16 +699,21 @@ class StreamingBubble extends StatefulWidget {
 
 class _StreamingBubbleState extends State<StreamingBubble> {
   bool _showCursor = true;
+  Timer? _cursorTimer;
 
   @override
   void initState() {
     super.initState();
-    Future.doWhile(() async {
-      await Future.delayed(const Duration(milliseconds: 500));
-      if (!mounted) return false;
+    _cursorTimer = Timer.periodic(const Duration(milliseconds: 500), (_) {
+      if (!mounted) return;
       setState(() => _showCursor = !_showCursor);
-      return true;
     });
+  }
+
+  @override
+  void dispose() {
+    _cursorTimer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -763,7 +770,7 @@ class _StreamingBubbleState extends State<StreamingBubble> {
       return ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: Image.network(
-          char!.avatarUrl!,
+          AppConfig.resolveImageUrl(char!.avatarUrl!)!,
           fit: BoxFit.cover,
           errorBuilder: (_, __, ___) => _defaultAvatar(),
         ),
@@ -1013,7 +1020,7 @@ class MessageItem extends StatelessWidget {
       return ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: Image.network(
-          char!.avatarUrl!,
+          AppConfig.resolveImageUrl(char!.avatarUrl!)!,
           fit: BoxFit.cover,
           errorBuilder: (_, __, ___) => _defaultAvatar(char),
         ),
@@ -1704,7 +1711,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       return ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Image.network(
-          character!.avatarUrl!,
+          AppConfig.resolveImageUrl(character!.avatarUrl!)!,
           width: 40,
           height: 40,
           fit: BoxFit.cover,

@@ -2,7 +2,7 @@
 // Replicates React Native api.ts behavior with auth and refresh token logic
 
 import 'package:dio/dio.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
 import '../config/app_config.dart';
 import '../storage/token_storage.dart';
 import '../errors/app_exceptions.dart';
@@ -32,16 +32,6 @@ class DioClient {
     // Add interceptors
     _dio.interceptors.add(_authInterceptor());
     _dio.interceptors.add(_errorInterceptor());
-    _dio.interceptors.add(
-      PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseHeader: false,
-        responseBody: true,
-        error: true,
-        compact: true,
-      ),
-    );
   }
 
   // Auth interceptor - attach token to requests

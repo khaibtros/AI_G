@@ -4,22 +4,14 @@
   "private": true,
   "workspaces": [
     "shared",
-    "server",
-    "app"
+    "server"
   ],
   "scripts": {
     "server:dev": "npm run dev --workspace=server",
-    "app:dev": "npm run dev --workspace=app",
     "shared:build": "npm run build --workspace=shared",
     "server:build": "npm run build --workspace=server",
     "postinstall": "npm run shared:build",
     "build": "npm run shared:build && npm run server:build",
     "seed": "npm run seed --workspace=server"
-  },
-  "dependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-native-web": "^0.21.0",
-    "react-native-worklets": "0.5.1"
   }
 }

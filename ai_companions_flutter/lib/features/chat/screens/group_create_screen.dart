@@ -6,6 +6,7 @@ import '../../../core/theme/app_typography.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_border_radius.dart';
 import '../../character/providers/character_provider.dart';
+import '../../../core/config/app_config.dart';
 import '../../../core/services/group_service.dart';
 
 class GroupCreateScreen extends ConsumerStatefulWidget {
@@ -129,7 +130,7 @@ class _GroupCreateScreenState extends ConsumerState<GroupCreateScreen> {
                             children: [
                               CircleAvatar(
                                 radius: 30,
-                                backgroundImage: character.avatarUrl != null ? NetworkImage(character.avatarUrl!) : null,
+                                backgroundImage: character.avatarUrl != null ? NetworkImage(AppConfig.resolveImageUrl(character.avatarUrl!)!) : null,
                                 child: character.avatarUrl == null ? Text(character.name[0]) : null,
                               ),
                               SizedBox(height: AppSpacing.sm),
